@@ -75,10 +75,8 @@ struct FunctionNode : public Node {
 
     public:
         FunctionNode() = delete;
-        FunctionNode(std::string functionName, Node* arguments[]) : m_FunctionName(functionName), m_Arguments() {
-            m_ArgumentsSize = sizeof(arguments);
-            m_Arguments.reserve(m_ArgumentsSize);
-            m_Arguments.insert(m_Arguments.end(), arguments, arguments + m_ArgumentsSize);
+        FunctionNode(std::string functionName, std::vector<Node*> arguments) : m_FunctionName(functionName), m_Arguments(arguments) {
+            m_ArgumentsSize = arguments.size();
         }
         ~FunctionNode() {
             for(Node* n : m_Arguments) {
