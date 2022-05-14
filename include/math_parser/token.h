@@ -7,5 +7,6 @@ enum Token {
     OpenParens,
     CloseParens,
     Identifier,
+    Comma,
     Number
 };

@@ -1,6 +1,7 @@
 #include <math_parser/parser.h>
 #include <parser_exception/unexpected_char.h>
 #include <iostream>
+#include <vector>
 
 Node* Parser::parse_expression() {
     Node* expression = this->parse_add_subtract();
@@ -150,11 +151,43 @@ Node* Parser::parse_leaf() {
         return node;
     }
 
-    // Is it a variable?
+    // Is it a variable or function?
     if(this->m_Tokenizer.get_token() == Identifier) {
-        Node* node = new ConstantNode(this->m_Tokenizer.get_current_identifier());
+        // capture the name and skip it
+        std::string identifier = this->m_Tokenizer.get_current_identifier();
         this->m_Tokenizer.next_token();
-        return node;
+
+        // Parenthesis indicate a function call, otherwise just a constant
+        if(this->m_Tokenizer.get_token() != OpenParens) {
+            return new ConstantNode(this->m_Tokenizer.get_current_identifier());
+        } else {
+            // Skip close parenthesis
+            this->m_Tokenizer.next_token();
+
+            std::vector<Node*> arguments;
+            while(true) {
+                // Parse argument and add to list
+                arguments.emplace_back(this->parse_add_subtract());
+
+                // Is there another argument?
+                if(this->m_Tokenizer.get_token() == Comma) {
+                    this->m_Tokenizer.next_token();
+                    continue;
+                }
+
+                break;
+            }
+
+            // Check and skip ')'
+            if(this->m_Tokenizer.get_token() != CloseParens) {
+                throw UnexpectedCharException("Expected close parenthesis.");
+            }
+
+            this->m_Tokenizer.next_token();
+
+            // Create the function node
+            return new FunctionNode(identifier, arguments);
+        }
     }
     
     throw UnexpectedCharException("Unexpected token: " + this->m_Tokenizer.get_token());
