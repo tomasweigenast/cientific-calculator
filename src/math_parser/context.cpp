@@ -11,3 +11,7 @@ double DefaultContext::resolve_constant(std::string name) {
 
     throw UnknownConstantException(name);
 }
+
+double DefaultContext::call_function(std::string name, double arguments[]) {
+    
+}
