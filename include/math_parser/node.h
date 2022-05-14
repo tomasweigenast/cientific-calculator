@@ -1,5 +1,6 @@
 #include <operation.h>
 #include <context.h>
+#include <vector>
 
 struct Node {
     public:
@@ -62,6 +63,30 @@ struct ConstantNode : public Node {
     public:
         ConstantNode() = delete;
         ConstantNode(std::string constantName) : m_ConstantName(constantName){}
+
+        double eval(Context *context);
+};
+
+struct FunctionNode : public Node {
+    private:
+        std::string m_FunctionName;
+        std::vector<Node*> m_Arguments;
+        unsigned int m_ArgumentsSize;
+
+    public:
+        FunctionNode() = delete;
+        FunctionNode(std::string functionName, Node* arguments[]) : m_FunctionName(functionName), m_Arguments() {
+            m_ArgumentsSize = sizeof(arguments);
+            m_Arguments.reserve(m_ArgumentsSize);
+            m_Arguments.insert(m_Arguments.end(), arguments, arguments + m_ArgumentsSize);
+        }
+        ~FunctionNode() {
+            for(Node* n : m_Arguments) {
+                delete n;
+            }
+
+            m_Arguments.clear();
+        }
 
         double eval(Context *context);
 };
