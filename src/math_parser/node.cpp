@@ -20,5 +20,5 @@ double UnaryNode::eval(Context *context) {
 }
 
 double ConstantNode::eval(Context *context) {
-    return context->resolve_variable(this->m_ConstantName);
+    return context->resolve_constant(this->m_ConstantName);
 }

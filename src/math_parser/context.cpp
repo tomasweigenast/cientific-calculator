@@ -2,7 +2,7 @@
 #include <cmath>
 #include <parser_exception/unknown_constant.h>
 
-double DefaultContext::resolve_variable(std::string name) {
+double DefaultContext::resolve_constant(std::string name) {
     if(name == "pi") {
         return M_PI;
     } else if(name == "e") {
