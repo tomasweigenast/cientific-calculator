@@ -6,7 +6,7 @@ enum Token {
     Divide,
     OpenParens,
     CloseParens,
-    Identifier,
     Comma,
+    Identifier,
     Number
 };

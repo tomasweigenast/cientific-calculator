@@ -59,6 +59,11 @@ void Tokenizer::next_token() {
             this->next_char();
             this->m_Token = CloseParens;
             return;
+
+        case ',':
+            this->next_char();
+            this->m_Token = Comma;
+            return;
     }
 
     // is it a number?
