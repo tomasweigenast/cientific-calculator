@@ -66,7 +66,7 @@ void run_test()
 
 	delete bNode;*/
 	// std::string input = "10+20\0";
-	std::istringstream st("e;");
+	std::istringstream st("sqrt(2,2);");
 	try {
 		Tokenizer tokenizer(st);
 		Parser parser(tokenizer);

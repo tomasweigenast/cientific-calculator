@@ -31,5 +31,5 @@ double FunctionNode::eval(Context *context) {
     }
 
     // Call the function
-    return context->call_function(this->m_FunctionName, argumentValues);
+    return context->call_function(this->m_FunctionName, argumentValues, this->m_ArgumentsSize);
 }
