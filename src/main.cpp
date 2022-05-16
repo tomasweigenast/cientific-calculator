@@ -1,4 +1,7 @@
+#define _USE_MATH_DEFINES
+
 #include <iostream>
+#include <iomanip>
 #include <sstream>
 #include <string>
 #include <log.h>
@@ -66,14 +69,14 @@ void run_test()
 
 	delete bNode;*/
 	// std::string input = "10+20\0";
-	std::istringstream st("sin(25);");
+	std::istringstream st("pi;");
 	try {
 		Tokenizer tokenizer(st);
 		Parser parser(tokenizer);
 		Context *context = new DefaultContext();
 
 		double result = parser.parse_expression()->eval(context); 
-		std::cout << "Result: " << result << std::endl;
+		std::cout << "Result: " << std::setprecision(50) << result << std::endl;
 	} catch(const UnexpectedCharException& ex) {
 		std::cout << "Error: " << ex.what() << std::endl;
 	} catch(const UnknownConstantException& ex) {
