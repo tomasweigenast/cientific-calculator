@@ -65,5 +65,16 @@ double DefaultContext::call_function(std::string name, double arguments[], unsig
         }
 
         return atan(arguments[0]);
+    } else if(name == "sum") {
+        if(argumentCount != 1) {
+            throw InvalidArgumentException("atan expects one argument.");
+        }
+
+        // double i = arguments[0];
+        double n = arguments[1];
+
+        for(double i = arguments[0]; i < n; i++) {
+            
+        }
     }
 }

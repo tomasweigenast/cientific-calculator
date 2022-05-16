@@ -64,6 +64,8 @@
         "condition_variable": "cpp",
         "mutex": "cpp",
         "stop_token": "cpp",
-        "thread": "cpp"
+        "thread": "cpp",
+        "node.h": "c",
+        "function_arguments.h": "c"
     }
 }

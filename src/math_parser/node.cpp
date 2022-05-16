@@ -1,4 +1,5 @@
 #include <math_parser/node.h>
+#include <math_parser/function_context.h>
 
 double NumberNode::eval(Context *context) {
     return this->m_Number;
@@ -24,12 +25,6 @@ double ConstantNode::eval(Context *context) {
 }
 
 double FunctionNode::eval(Context *context) {
-    // Evaluate all arguments
-    double argumentValues[this->m_ArgumentsSize];
-    for(int i = 0; i < this->m_ArgumentsSize; i++) {
-        argumentValues[i] = this->m_Arguments[i]->eval(context);
-    }
-
     // Call the function
-    return context->call_function(this->m_FunctionName, argumentValues, this->m_ArgumentsSize);
+    return context->call_function(this->m_FunctionName, this->m_Arguments);
 }
