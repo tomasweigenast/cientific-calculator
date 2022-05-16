@@ -73,7 +73,7 @@ void run_test()
 	try {
 		Tokenizer tokenizer(st);
 		Parser parser(tokenizer);
-		Context *context = new DefaultContext();
+		Context *context = new VariableContext(20, "x");
 
 		double result = parser.parse_expression()->eval(context); 
 		std::cout << "Result: " << std::setprecision(50) << result << std::endl;

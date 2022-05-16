@@ -161,15 +161,8 @@ Node* Parser::parse_leaf() {
         if(this->m_Tokenizer.get_token() != OpenParens) {
             return new ConstantNode(this->m_Tokenizer.get_current_identifier());
         } else {
-            // Skip close parenthesis or recursive function identifier
+            // Skip close parenthesis
             this->m_Tokenizer.next_token();
-
-            // Determine if current token identifies a recursive function
-            bool recursiveFunction = false;
-            if(this->m_Tokenizer.get_token() == Dollar) {
-                recursiveFunction = true;
-                this->m_Tokenizer.next_token();
-            }
 
             std::vector<Node*> arguments;
             while(true) {
@@ -191,11 +184,6 @@ Node* Parser::parse_leaf() {
             }
 
             this->m_Tokenizer.next_token();
-
-            // Create a recursive callable function
-            if(recursiveFunction) {
-                return new RecursiveFunctionNode(identifier, arguments);
-            }
 
             // Create the function node
             return new FunctionNode(identifier, arguments);
