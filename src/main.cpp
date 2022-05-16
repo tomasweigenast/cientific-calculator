@@ -84,8 +84,10 @@ void run_test()
 	}
 }
 
-int main(int argc, char *argv[])
+int main(int argc, char *argv[], char* envp[])
 {
+	std::cout << envp << std::endl;
+
 	println("Welcome to the scientific calculator");
 
 	#if TEST

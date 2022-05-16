@@ -1,5 +1,5 @@
 #include <math_parser/node.h>
-#include <math_parser/function_context.h>
+// #include <math_parser/function_context.h>
 
 double NumberNode::eval(Context *context) {
     return this->m_Number;
@@ -26,5 +26,5 @@ double ConstantNode::eval(Context *context) {
 
 double FunctionNode::eval(Context *context) {
     // Call the function
-    return context->call_function(this->m_FunctionName, this->m_Arguments);
+    return context->call_function(this->m_FunctionName, {}, 0);
 }
