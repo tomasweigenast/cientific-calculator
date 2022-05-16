@@ -28,9 +28,13 @@ INCLUDE	:= include
 # define lib directory
 LIB		:= lib
 
+TEST := tests
+
 ifeq ($(OS),Windows_NT)
 MAIN	:= main.exe
-SOURCEDIRS	:= $(SRC)
+SOURCEDIRS	=\ 
+	$(SRC)\
+	$(TEST)
 INCLUDEDIRS	:= $(INCLUDE)
 LIBDIRS		:= $(LIB)
 FIXPATH = $(subst /,\,$1)
@@ -88,6 +92,7 @@ clean:
 	$(RM) $(call FIXPATH,$(OBJECTS))
 	@echo Cleanup complete!
 
+
 run: all
-	./$(OUTPUTMAIN)
+	./$(OUTPUTMAIN) $(ARGS)
 	@echo Executing 'run: all' complete!

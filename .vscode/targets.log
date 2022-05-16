@@ -1,6 +1,4 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
-make: *** No rule to make target 'src/log.o', needed by 'main'.  Stop.
-
 # GNU Make 4.2.1
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2016 Free Software Foundation, Inc.
@@ -8,7 +6,7 @@ make: *** No rule to make target 'src/log.o', needed by 'main'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon May 16 12:27:21 2022
+# Make data base, printed on Mon May 16 17:25:54 2022
 
 # Variables
 
@@ -36,7 +34,7 @@ VSCODE_LOG_NATIVE = false
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
 IM_CONFIG_PHASE = 1
-# makefile (from 'Makefile', line 50)
+# makefile (from 'Makefile', line 54)
 INCLUDES := -Iinclude -Iinclude/math_parser -Iinclude/parser_exception
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
@@ -50,7 +48,7 @@ XMODIFIERS = @im=ibus
 CURDIR := /home/tomas/dev/git/cientific-calculator
 # makefile
 SHELL = /bin/sh
-# makefile (from 'Makefile', line 45)
+# makefile (from 'Makefile', line 49)
 RM = rm -f
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en-gb","availableLanguages":{},"_languagePackSupport":true}
@@ -60,6 +58,7 @@ _ = /usr/share/code/code
 JOURNAL_STREAM = 8:53253
 # environment
 XDG_CONFIG_DIRS = /etc/xdg/xdg-zorin:/etc/xdg
+ 
 # makefile (from 'Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
 # automatic
@@ -68,8 +67,8 @@ MAKEFILE_LIST :=  Makefile
 GIO_LAUNCHED_DESKTOP_FILE = /usr/share/applications/code.desktop
 # environment
 USERNAME = tomas
-# makefile (from 'Makefile', line 56)
-SOURCES := src/log.cpp src/main.cpp src/equation_system.cpp src/math_parser/tokenizer.cpp src/math_parser/operation.cpp src/math_parser/node.cpp src/math_parser/parser.cpp src/math_parser/context.cpp
+# makefile (from 'Makefile', line 60)
+SOURCES := src/test_suite.cpp src/log.cpp src/main.cpp src/equation_system.cpp src/app.cpp src/math_parser/tokenizer.cpp src/math_parser/operation.cpp src/math_parser/node.cpp src/math_parser/parser.cpp src/math_parser/context.cpp
 # makefile (from 'Makefile', line 10)
 CXXFLAGS := -std=gnu++2a -Wall -Wextra -g
 # environment
@@ -106,7 +105,7 @@ SESSION_MANAGER = local/tomas-laptop-envy:@/tmp/.ICE-unix/2560,unix/tomas-laptop
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
 GOPATH = /home/tomas/go/bin
-# makefile (from 'Makefile', line 43)
+# makefile (from 'Makefile', line 47)
 LIBDIRS := lib
 # environment
 XDG_MENU_PREFIX = gnome-
@@ -140,7 +139,7 @@ VSCODE_PIPE_LOGGING = true
 PWD = /home/tomas/dev/git/cientific-calculator
 # environment
 QT_QPA_PLATFORMTHEME = gtk3
-# makefile (from 'Makefile', line 67)
+# makefile (from 'Makefile', line 71)
 OUTPUTMAIN := output/main
 # default
 .LOADED := 
@@ -161,10 +160,10 @@ VSCODE_CODE_CACHE_PATH = /home/tomas/.config/Code/CachedData/da15b6fd3ef856477bf
 # environment
 LOGNAME = tomas
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
 # automatic
 +F = $(notdir $+)
-# makefile (from 'Makefile', line 42)
+# makefile (from 'Makefile', line 46)
 INCLUDEDIRS := include include/math_parser include/parser_exception
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
@@ -172,8 +171,10 @@ VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 GNOME_DESKTOP_SESSION_ID = this-is-deprecated
 # automatic
 ^D = $(patsubst %/,%,$(dir $^))
-# makefile (from 'Makefile', line 46)
+# makefile (from 'Makefile', line 50)
 MD := mkdir -p
+# makefile (from 'Makefile', line 31)
+TEST := tests
 # environment
 LC_TIME = es_AR.UTF-8
 # default
@@ -184,7 +185,7 @@ MAKECMDGOALS := all
 QT_IM_MODULE = ibus
 # environment
 SHLVL = 0
-# makefile (from 'Makefile', line 44)
+# makefile (from 'Makefile', line 48)
 FIXPATH = $1
 # environment
 GNOME_SHELL_SESSION_MODE = zorin
@@ -224,13 +225,13 @@ MAKEFLAGS = pqrR
 MFLAGS = -pqrR
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
-# makefile (from 'Makefile', line 40)
+# makefile (from 'Makefile', line 44)
 MAIN := main
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # environment
 GDK_BACKEND = x11
-# makefile (from 'Makefile', line 41)
+# makefile (from 'Makefile', line 45)
 SOURCEDIRS := src src/math_parser
 # environment
 LC_PAPER = es_AR.UTF-8
@@ -256,7 +257,7 @@ LC_MEASUREMENT = es_AR.UTF-8
 LC_ALL = C
 # environment
 GJS_DEBUG_TOPICS = JS ERROR;JS LOG
-# makefile (from 'Makefile', line 53)
+# makefile (from 'Makefile', line 57)
 LIBS := -Llib
 # automatic
 ^F = $(notdir $^)
@@ -272,8 +273,8 @@ WINDOWPATH = 2
 LC_IDENTIFICATION = es_AR.UTF-8
 # default
 .RECIPEPREFIX := 
-# makefile (from 'Makefile', line 59)
-OBJECTS := src/log.o src/main.o src/equation_system.o src/math_parser/tokenizer.o src/math_parser/operation.o src/math_parser/node.o src/math_parser/parser.o src/math_parser/context.o
+# makefile (from 'Makefile', line 63)
+OBJECTS := src/test_suite.o src/log.o src/main.o src/equation_system.o src/app.o src/math_parser/tokenizer.o src/math_parser/operation.o src/math_parser/node.o src/math_parser/parser.o src/math_parser/context.o
 # environment
 LC_ADDRESS = es_AR.UTF-8
 # environment
@@ -281,20 +282,19 @@ LANG = C
 # environment
 VSCODE_PID = 28029
 # variable set hash-table stats:
-# Load=134/1024=13%, Rehash=0, Collisions=23/187=12%
+# Load=135/1024=13%, Rehash=0, Collisions=23/198=12%
 
 # Pattern-specific Variable Values
- 
 
 # No pattern-specific variable values.
 
 # Directories
 
 # . (device 66311, inode 6687760): 12 files, no impossibilities.
-# src (device 66311, inode 7214753): 6 files, no impossibilities.
-# src/math_parser (device 66311, inode 7214529): 7 files, no impossibilities.
+# src (device 66311, inode 7214753): 13 files, no impossibilities.
+# src/math_parser (device 66311, inode 7214529): 12 files, no impossibilities.
 
-# 25 files, no impossibilities in 3 directories.
+# 37 files, no impossibilities in 3 directories.
 
 # Implicit Rules
 
@@ -304,16 +304,20 @@ VSCODE_PID = 28029
 
 # Not a target:
 src/math_parser/tokenizer.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-05-16 17:25:42.337955408
+#  File has been updated.
+#  Successfully updated.
 
 all: output main
 #  Command line target.
 #  Implicit rule search has not been done.
 #  File does not exist.
-#  File has not been updated.
-#  recipe to execute (from 'Makefile', line 70):
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/10=0%
+#  recipe to execute (from 'Makefile', line 74):
 	@echo Executing 'all' complete!
 
 .PHONY: clean
@@ -323,40 +327,58 @@ all: output main
 
 # Not a target:
 src/main.o:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-16 17:25:41.257936852
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.SUFFIXES:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
 src/math_parser/parser.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-05-16 17:25:43.697978736
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-11 15:29:42.727916595
+#  Last modified 2022-05-16 17:25:53.458144924
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 src/log.o:
 #  Implicit rule search has been done.
-#  File does not exist.
-#  File has not been updated.
+#  Last modified 2022-05-16 17:25:40.673926807
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 src/math_parser/operation.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-05-16 17:25:42.673961175
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+src/test_suite.o:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-16 17:25:40.377921712
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 src/math_parser/context.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-05-16 17:25:44.061984974
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 .DEFAULT:
@@ -366,23 +388,24 @@ src/math_parser/context.o:
 
 # Not a target:
 src/math_parser/node.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-05-16 17:25:43.141969205
+#  File has been updated.
+#  Successfully updated.
 
 run: all
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 92):
-	./$(OUTPUTMAIN)
+#  recipe to execute (from 'Makefile', line 97):
+	./$(OUTPUTMAIN) $(ARGS)
 	@echo Executing 'run: all' complete!
 
 .cpp.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 83):
+#  recipe to execute (from 'Makefile', line 87):
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -c $<  -o $@
 
 clean:
@@ -390,47 +413,75 @@ clean:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 87):
+#  recipe to execute (from 'Makefile', line 91):
 	$(RM) $(OUTPUTMAIN)
 	$(RM) $(call FIXPATH,$(OBJECTS))
 	@echo Cleanup complete!
 
-main: src/log.o src/main.o src/equation_system.o src/math_parser/tokenizer.o src/math_parser/operation.o src/math_parser/node.o src/math_parser/parser.o src/math_parser/context.o
+# Not a target:
+src/app.o:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-16 17:25:42.013949846
+#  File has been updated.
+#  Successfully updated.
+
+main: src/test_suite.o src/log.o src/main.o src/equation_system.o src/app.o src/math_parser/tokenizer.o src/math_parser/operation.o src/math_parser/node.o src/math_parser/parser.o src/math_parser/context.o
 #  Implicit rule search has not been done.
+#  Implicit/static pattern stem: ''
 #  File does not exist.
-#  File has not been updated.
-#  recipe to execute (from 'Makefile', line 76):
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := main
+# automatic
+# % := 
+# automatic
+# * := 
+# automatic
+# + := src/test_suite.o src/log.o src/main.o src/equation_system.o src/app.o src/math_parser/tokenizer.o src/math_parser/operation.o src/math_parser/node.o src/math_parser/parser.o src/math_parser/context.o
+# automatic
+# | := 
+# automatic
+# < := src/test_suite.o
+# automatic
+# ^ := src/test_suite.o src/log.o src/main.o src/equation_system.o src/app.o src/math_parser/tokenizer.o src/math_parser/operation.o src/math_parser/node.o src/math_parser/parser.o src/math_parser/context.o
+# automatic
+# ? := src/test_suite.o src/log.o src/main.o src/equation_system.o src/app.o src/math_parser/tokenizer.o src/math_parser/operation.o src/math_parser/node.o src/math_parser/parser.o src/math_parser/context.o
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=2/18=11%
+#  recipe to execute (from 'Makefile', line 80):
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -o $(OUTPUTMAIN) $(OBJECTS) $(LFLAGS) $(LIBS)
 
 output:
 #  Implicit rule search has not been done.
-#  Last modified 2022-05-16 09:05:05.878206366
+ 
+#  Last modified 2022-05-16 17:25:44.065985043
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 73):
+#  recipe to execute (from 'Makefile', line 77):
 	$(MD) $(OUTPUT)
 
 # Not a target:
 src/equation_system.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-05-16 17:25:41.581942421
+#  File has been updated.
+#  Successfully updated.
 
 # files hash-table stats:
-# Load=18/1024=2%, Rehash=0, Collisions=0/44=0%
+# Load=20/1024=2%, Rehash=0, Collisions=0/49=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 40 / storage = 461 B / avg = 11 B
-# current buf: size = 8162 B / used = 461 B / count = 40 / avg = 11 B
+# strcache buffers: 1 (0) / strings = 54 / storage = 611 B / avg = 11 B
+# current buf: size = 8162 B / used = 611 B / count = 54 / avg = 11 B
 
-# strcache performance: lookups = 62 / hit rate = 35%
- 
+# strcache performance: lookups = 77 / hit rate = 29%
 # hash-table stats:
-# Load=40/8192=0%, Rehash=0, Collisions=3/62=5%
-# Finished Make data base on Mon May 16 12:27:21 2022
+# Load=54/8192=1%, Rehash=0, Collisions=3/77=4%
+# Finished Make data base on Mon May 16 17:25:54 2022
 
  
