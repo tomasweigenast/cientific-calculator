@@ -66,15 +66,22 @@ double DefaultContext::call_function(std::string name, double arguments[], unsig
 
         return atan(arguments[0]);
     } else if(name == "sum") {
-        if(argumentCount != 1) {
-            throw InvalidArgumentException("atan expects one argument.");
+        if(argumentCount != 3) {
+            throw InvalidArgumentException("sum expects three arguments.");
         }
 
-        // double i = arguments[0];
-        double n = arguments[1];
+        // TODO: add check to avoid decimal numbers in 'n' and 'i' variables
 
-        for(double i = arguments[0]; i < n; i++) {
+        // double i = arguments[0]; // desde donde empieza
+        int n = arguments[1]; // hasta donde llega la sumatoria
+
+        int results[n];
+        for(int i = arguments[0]; i < n; i++) {
             
         }
     }
+}
+
+double VariableContext::variable_value() {
+    return this->m_VariableValue;
 }

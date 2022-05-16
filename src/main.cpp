@@ -69,7 +69,7 @@ void run_test()
 
 	delete bNode;*/
 	// std::string input = "10+20\0";
-	std::istringstream st("pi;");
+	std::istringstream st("$sum(i=5,n=10,);");
 	try {
 		Tokenizer tokenizer(st);
 		Parser parser(tokenizer);

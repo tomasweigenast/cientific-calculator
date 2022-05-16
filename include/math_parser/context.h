@@ -25,4 +25,5 @@ struct VariableContext : public DefaultContext {
 
         double resolve_constant(std::string name);
         double call_function(std::string name, double arguments[], unsigned int argumentCount);
+        double variable_value();
 };

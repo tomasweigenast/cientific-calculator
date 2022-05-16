@@ -74,6 +74,7 @@ struct FunctionNode : public Node {
 
     public:
         FunctionNode() = delete;
+        FunctionNode(const FunctionNode&) = delete;
         FunctionNode(std::string functionName, std::vector<Node*> arguments) : m_FunctionName(functionName), m_Arguments(arguments) {}
         ~FunctionNode() {
             for(Node* n : m_Arguments) {
