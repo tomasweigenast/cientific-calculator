@@ -1,9 +1,14 @@
 #include <operation.h>
 #include <context.h>
 #include <vector>
+#include <iostream>
 
 struct Node {
     public:
+        virtual ~Node(){
+            std::cout << "Node deleted." << std::endl;
+        };
+
         virtual double eval(Context *context) = 0;
 };
 
@@ -14,6 +19,7 @@ struct NumberNode : public Node {
     public:
         NumberNode() = delete;
         NumberNode(double number) : m_Number(number) {}
+        ~NumberNode() {}
 
         double eval(Context *context);
 
@@ -63,6 +69,7 @@ struct ConstantNode : public Node {
     public:
         ConstantNode() = delete;
         ConstantNode(std::string constantName) : m_ConstantName(constantName){}
+        ~ConstantNode() {}
 
         double eval(Context *context);
 };

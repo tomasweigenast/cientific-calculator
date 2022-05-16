@@ -19,7 +19,6 @@ void Tokenizer::next_token() {
     
     // Skip whitespaces
     while(isspace(this->m_CurrentChar)) {
-        std::cout << "skipped" << std::endl;
         this->next_char();
     }   
 

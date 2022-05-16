@@ -23,7 +23,6 @@ struct VariableContext : public DefaultContext {
         VariableContext(const VariableContext&) = delete;
         VariableContext(double variableValue, std::string variableName) : m_VariableValue(variableValue), m_VariableName(variableName){}
 
-        double resolve_constant(std::string name);
-        double call_function(std::string name, double arguments[], unsigned int argumentCount);
+        double resolve_constant(std::string name) override;
         double variable_value();
 };

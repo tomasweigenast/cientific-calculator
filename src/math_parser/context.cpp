@@ -75,10 +75,22 @@ double DefaultContext::call_function(std::string name, double arguments[], unsig
         // double i = arguments[0]; // desde donde empieza
         int n = arguments[1]; // hasta donde llega la sumatoria
 
-        int results[n];
-        for(int i = arguments[0]; i < n; i++) {
+        // int results[n];
+        // for(int i = arguments[0]; i < n; i++) {
             
+        // }
+    }
+}
+
+double VariableContext::resolve_constant(std::string name) {
+    try {
+        return DefaultContext::resolve_constant(name);
+    } catch (const UnknownConstantException& ex) {
+        if(name == this->m_VariableName) {
+            return this->m_VariableValue;
         }
+
+        throw UnknownVariableException(name);
     }
 }
 

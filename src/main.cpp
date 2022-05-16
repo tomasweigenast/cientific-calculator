@@ -69,11 +69,12 @@ void run_test()
 
 	delete bNode;*/
 	// std::string input = "10+20\0";
-	std::istringstream st("$sum(i=5,n=10,);");
+	std::istringstream st("pi + y;");
 	try {
 		Tokenizer tokenizer(st);
 		Parser parser(tokenizer);
 		Context *context = new VariableContext(20, "x");
+		// Context *context = new DefaultContext();
 
 		double result = parser.parse_expression()->eval(context); 
 		std::cout << "Result: " << std::setprecision(50) << result << std::endl;
@@ -81,13 +82,13 @@ void run_test()
 		std::cout << "Error: " << ex.what() << std::endl;
 	} catch(const UnknownConstantException& ex) {
 		std::cout << "Error: " << ex.what() << std::endl;
+	} catch(const UnknownVariableException& ex) {
+		std::cout << "Error: " << ex.what() << std::endl;
 	}
 }
 
-int main(int argc, char *argv[], char* envp[])
+int main()
 {
-	std::cout << envp << std::endl;
-
 	println("Welcome to the scientific calculator");
 
 	#if TEST
