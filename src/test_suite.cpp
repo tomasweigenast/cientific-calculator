@@ -3,9 +3,8 @@
 #include <iostream>
 #include <programs/matrix/matrix.h>
 
-void TestSuite::run() {
-	std::cout << "Running tests..." << std::endl;
-
+void matrix_() 
+{
 	// Matrix m1 = Matrix::identity(5, 5);
 	// std::cout << m1 << std::endl;
 
@@ -70,4 +69,21 @@ void TestSuite::run() {
 
 	// double m7Determinant = m7.determinant();
 	// std::cout << "Determinant: " << m7Determinant << std::endl;
+}
+
+void test_matrix_emplace() 
+{
+	Matrix matrix(2, 2);
+	matrix.emplace(2);
+	matrix.emplace(5);
+	matrix.emplace(9.92);
+	matrix.emplace(12);
+
+	std::cout << matrix << std::endl;
+}
+
+void TestSuite::run() {
+	std::cout << "Running tests..." << std::endl;
+
+	test_matrix_emplace();
 }

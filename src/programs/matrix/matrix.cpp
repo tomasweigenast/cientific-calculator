@@ -15,6 +15,38 @@ void Matrix::set(uint i, uint j, double value) {
     
     m_Matrix[i-1][j-1] = value;
     m_Empty = false;
+    m_CanEmplace = false;
+}
+
+void Matrix::emplace(double value) {
+    if(!m_CanEmplace) throw ProgramException("emplace can only be called if the Matrix is empty.");
+    
+    uint i = m_NextEmptyPos->get_i();
+    uint j = m_NextEmptyPos->get_j();
+
+    m_Matrix[i-1][j-1] = value;
+    
+    if(j < m_ColumnCount) // there are columns available 
+    {
+        j++;
+    }
+    else if(j == m_ColumnCount) // must be reset and add new row
+    {
+        j = 1;
+        if(i < m_RowCount) // increment row if there are available
+        {
+            i++;
+        }
+        else // otherwise, mark as finished
+        {
+            m_CanEmplace = false;
+            m_Empty = false;
+            return;
+        }
+    }
+
+    // Set next available position
+    m_NextEmptyPos->set(i, j);
 }
 
 double Matrix::at(uint i, uint j) const {
@@ -167,13 +199,13 @@ Matrix Matrix::minor_complementary(uint i, uint j) {
                 continue;
             }
 
-            int newRow = row-1;
-            int newCol = col-1;
+            // int newRow = row-1;
+            // int newCol = col-1;
 
-            if(newRow < 1) newRow = 1;
-            if(newCol < 1) newCol = 1;
+            // if(newRow < 1) newRow = 1;
+            // if(newCol < 1) newCol = 1;
 
-            minor.set(newRow, newCol, at(row, col));
+            minor.emplace(at(row, col));
         }
     }
 

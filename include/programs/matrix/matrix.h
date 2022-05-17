@@ -3,6 +3,7 @@
 #include <vector>
 #include <util/id_generator.h>
 #include <parser_exception/program_error.h>
+#include <data/pos.h>
 
 struct Matrix {
     private:
@@ -10,6 +11,9 @@ struct Matrix {
         uint m_ColumnCount;
         double** m_Matrix;
         bool m_Empty;
+        Pos* m_NextEmptyPos;
+        bool m_CanEmplace;
+
         std::string m_Id;
 
         void initialize_() {
@@ -21,7 +25,14 @@ struct Matrix {
 
     public:
         Matrix() = delete;
-        Matrix(const Matrix& other) : m_RowCount(other.m_RowCount), m_ColumnCount(other.m_ColumnCount), m_Empty(other.m_Empty), m_Id(random_id()) {
+        Matrix(const Matrix& other) 
+            :   m_RowCount(other.m_RowCount), 
+                m_ColumnCount(other.m_ColumnCount), 
+                m_Empty(other.m_Empty),
+                m_NextEmptyPos(other.m_NextEmptyPos),
+                m_CanEmplace(other.m_CanEmplace), 
+                m_Id(random_id()) 
+        {
             initialize_();
             for(uint i = 0; i < other.m_RowCount; i++) {
                 for(uint j = 0; j < other.m_ColumnCount; j++) {
@@ -30,10 +41,24 @@ struct Matrix {
                 }
             }
         }
-        Matrix(uint rowCount, uint columnCount) : m_RowCount(rowCount), m_ColumnCount(columnCount), m_Empty(true), m_Id(random_id()) {
+        Matrix(uint rowCount, uint columnCount) 
+            :   m_RowCount(rowCount), 
+                m_ColumnCount(columnCount), 
+                m_Empty(true),
+                m_NextEmptyPos(new Pos(1, 1)),
+                m_CanEmplace(true), 
+                m_Id(random_id()) 
+        {
             initialize_();
         }
-        Matrix(const std::vector<std::vector<double>>& rows, uint colCount) : m_RowCount(rows.size()), m_ColumnCount(colCount), m_Empty(false), m_Id(random_id()) {
+        Matrix(const std::vector<std::vector<double>>& rows, uint colCount) 
+            :   m_RowCount(rows.size()), 
+                m_ColumnCount(colCount), 
+                m_Empty(false),
+                m_NextEmptyPos(nullptr),
+                m_CanEmplace(false),
+                m_Id(random_id()) 
+        {
             uint i = 0;
             
             // Create initial matrix to hold "rows.size()" rows
@@ -59,6 +84,7 @@ struct Matrix {
             }
 
             delete[] m_Matrix;
+            delete m_NextEmptyPos;
         }
 
         uint row_count() const;
@@ -67,6 +93,7 @@ struct Matrix {
         bool is_identity() const;
         bool is_square() const;
         void set(uint i, uint j, double value); // 1-index base
+        void emplace(double value);
         double at(uint i, uint j) const; // 1-index base
         double sum() const;
         double determinant();
