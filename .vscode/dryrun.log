@@ -1,18 +1,18 @@
-make --dry-run --keep-going --print-directory
+make --dry-run --always-make --keep-going --print-directory
 make: Entering directory '/home/tomas/dev/git/cientific-calculator'
- 
-g++ -std=gnu++2a -Wall -Wextra -g -Iinclude -Iinclude/math_parser -Iinclude/parser_exception -c src/test_suite.cpp  -o src/test_suite.o
-g++ -std=gnu++2a -Wall -Wextra -g -Iinclude -Iinclude/math_parser -Iinclude/parser_exception -c src/log.cpp  -o src/log.o
-g++ -std=gnu++2a -Wall -Wextra -g -Iinclude -Iinclude/math_parser -Iinclude/parser_exception -c src/main.cpp  -o src/main.o
- 
-g++ -std=gnu++2a -Wall -Wextra -g -Iinclude -Iinclude/math_parser -Iinclude/parser_exception -c src/equation_system.cpp  -o src/equation_system.o
-g++ -std=gnu++2a -Wall -Wextra -g -Iinclude -Iinclude/math_parser -Iinclude/parser_exception -c src/app.cpp  -o src/app.o
-g++ -std=gnu++2a -Wall -Wextra -g -Iinclude -Iinclude/math_parser -Iinclude/parser_exception -c src/math_parser/tokenizer.cpp  -o src/math_parser/tokenizer.o
-g++ -std=gnu++2a -Wall -Wextra -g -Iinclude -Iinclude/math_parser -Iinclude/parser_exception -c src/math_parser/operation.cpp  -o src/math_parser/operation.o
-g++ -std=gnu++2a -Wall -Wextra -g -Iinclude -Iinclude/math_parser -Iinclude/parser_exception -c src/math_parser/node.cpp  -o src/math_parser/node.o
-g++ -std=gnu++2a -Wall -Wextra -g -Iinclude -Iinclude/math_parser -Iinclude/parser_exception -c src/math_parser/parser.cpp  -o src/math_parser/parser.o
-g++ -std=gnu++2a -Wall -Wextra -g -Iinclude -Iinclude/math_parser -Iinclude/parser_exception -c src/math_parser/context.cpp  -o src/math_parser/context.o
-g++ -std=gnu++2a -Wall -Wextra -g -Iinclude -Iinclude/math_parser -Iinclude/parser_exception -o output/main src/test_suite.o src/log.o src/main.o src/equation_system.o src/app.o src/math_parser/tokenizer.o src/math_parser/operation.o src/math_parser/node.o src/math_parser/parser.o src/math_parser/context.o  -Llib
+mkdir -p output
+g++ -std=gnu++2a -Wall -Wextra -g -Iinclude -Iinclude/math_parser -Iinclude/parser_exception -Iinclude/programs -Iinclude/programs/matrix -c src/test_suite.cpp  -o src/test_suite.o
+g++ -std=gnu++2a -Wall -Wextra -g -Iinclude -Iinclude/math_parser -Iinclude/parser_exception -Iinclude/programs -Iinclude/programs/matrix -c src/log.cpp  -o src/log.o
+g++ -std=gnu++2a -Wall -Wextra -g -Iinclude -Iinclude/math_parser -Iinclude/parser_exception -Iinclude/programs -Iinclude/programs/matrix -c src/main.cpp  -o src/main.o
+g++ -std=gnu++2a -Wall -Wextra -g -Iinclude -Iinclude/math_parser -Iinclude/parser_exception -Iinclude/programs -Iinclude/programs/matrix -c src/equation_system.cpp  -o src/equation_system.o
+g++ -std=gnu++2a -Wall -Wextra -g -Iinclude -Iinclude/math_parser -Iinclude/parser_exception -Iinclude/programs -Iinclude/programs/matrix -c src/app.cpp  -o src/app.o
+g++ -std=gnu++2a -Wall -Wextra -g -Iinclude -Iinclude/math_parser -Iinclude/parser_exception -Iinclude/programs -Iinclude/programs/matrix -c src/math_parser/tokenizer.cpp  -o src/math_parser/tokenizer.o
+g++ -std=gnu++2a -Wall -Wextra -g -Iinclude -Iinclude/math_parser -Iinclude/parser_exception -Iinclude/programs -Iinclude/programs/matrix -c src/math_parser/operation.cpp  -o src/math_parser/operation.o
+g++ -std=gnu++2a -Wall -Wextra -g -Iinclude -Iinclude/math_parser -Iinclude/parser_exception -Iinclude/programs -Iinclude/programs/matrix -c src/math_parser/node.cpp  -o src/math_parser/node.o
+g++ -std=gnu++2a -Wall -Wextra -g -Iinclude -Iinclude/math_parser -Iinclude/parser_exception -Iinclude/programs -Iinclude/programs/matrix -c src/math_parser/parser.cpp  -o src/math_parser/parser.o
+g++ -std=gnu++2a -Wall -Wextra -g -Iinclude -Iinclude/math_parser -Iinclude/parser_exception -Iinclude/programs -Iinclude/programs/matrix -c src/math_parser/context.cpp  -o src/math_parser/context.o
+g++ -std=gnu++2a -Wall -Wextra -g -Iinclude -Iinclude/math_parser -Iinclude/parser_exception -Iinclude/programs -Iinclude/programs/matrix -c src/programs/matrix/matrix.cpp  -o src/programs/matrix/matrix.o
+g++ -std=gnu++2a -Wall -Wextra -g -Iinclude -Iinclude/math_parser -Iinclude/parser_exception -Iinclude/programs -Iinclude/programs/matrix -o output/main src/test_suite.o src/log.o src/main.o src/equation_system.o src/app.o src/math_parser/tokenizer.o src/math_parser/operation.o src/math_parser/node.o src/math_parser/parser.o src/math_parser/context.o src/programs/matrix/matrix.o  -Llib
 echo Executing 'all' complete!
 make: Leaving directory '/home/tomas/dev/git/cientific-calculator'
  
