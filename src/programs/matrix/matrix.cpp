@@ -37,6 +37,10 @@ bool Matrix::is_identity() const {
     return true;
 }
 
+bool Matrix::is_square() const {
+    return m_ColumnCount == m_RowCount;
+}
+
 Matrix Matrix::identity(unsigned int rowCount, unsigned int columnCount) {
     if(rowCount != columnCount) {
         throw ProgramException("Identity matrix must be square.");

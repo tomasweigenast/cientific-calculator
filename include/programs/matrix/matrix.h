@@ -64,6 +64,7 @@ struct  Matrix {
         unsigned int column_count() const;
         bool is_empty() const;
         bool is_identity() const;
+        bool is_square() const;
         void set(unsigned int i, unsigned int j, double value);
         double at(unsigned int i, unsigned int j) const;
         double sum() const;
