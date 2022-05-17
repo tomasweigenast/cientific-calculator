@@ -16,7 +16,7 @@ double DefaultContext::resolve_constant(std::string name) {
     throw UnknownConstantException(name);
 }
 
-double DefaultContext::call_function(std::string name, double arguments[], unsigned int argumentCount) {
+double DefaultContext::call_function(std::string name, double arguments[], uint argumentCount) {
     if(name == "pow") {
         if(argumentCount != 2) {
             throw InvalidArgumentException("pow expects two arguments.");

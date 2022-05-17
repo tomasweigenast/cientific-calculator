@@ -66,6 +66,7 @@
         "stop_token": "cpp",
         "thread": "cpp",
         "node.h": "c",
-        "function_arguments.h": "c"
+        "function_arguments.h": "c",
+        "future": "c"
     }
 }

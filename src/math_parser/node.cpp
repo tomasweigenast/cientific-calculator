@@ -27,7 +27,7 @@ double ConstantNode::eval(Context *context) {
 double FunctionNode::eval(Context *context) {
     double* arguments = new double[this->m_Arguments.size()];
 
-    for(unsigned int i = 0; i < this->m_Arguments.size(); i++) {
+    for(uint i = 0; i < this->m_Arguments.size(); i++) {
         arguments[i] = this->m_Arguments[i]->eval(context);
     }
 

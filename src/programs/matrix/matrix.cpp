@@ -1,20 +1,27 @@
 #include <programs/matrix/matrix.h>
+#include <cmath>
 
-unsigned int Matrix::row_count() const {
+uint Matrix::row_count() const {
     return m_RowCount;
 }
 
-unsigned int Matrix::column_count() const {
+uint Matrix::column_count() const {
     return m_ColumnCount;
 }
 
-void Matrix::set(unsigned int i, unsigned int j, double value) {
-    m_Matrix[i][j] = value;
+void Matrix::set(uint i, uint j, double value) {
+    if(i < 1) throw ProgramException("Row identifier must be greater than 0.");
+    if(j < 1) throw ProgramException("Column identifier must be greater than 0.");
+    
+    m_Matrix[i-1][j-1] = value;
     m_Empty = false;
 }
 
-double Matrix::at(unsigned int i, unsigned int j) const {
-    return m_Matrix[i][j];
+double Matrix::at(uint i, uint j) const {
+    if(i < 1) throw ProgramException("Row identifier must be greater than 0.");
+    if(j < 1) throw ProgramException("Column identifier must be greater than 0.");
+
+    return m_Matrix[i-1][j-1];
 }
 
 bool Matrix::is_empty() const {
@@ -26,8 +33,8 @@ bool Matrix::is_identity() const {
         return false;
     }
 
-    for(int i = 0; i < m_RowCount; i++) {
-        for(int j = 0; j < m_ColumnCount; j++) {
+    for(uint i = 0; i < m_RowCount; i++) {
+        for(uint j = 0; j < m_ColumnCount; j++) {
             if(m_Matrix[i][j] != 0) {
                 return false;
             }
@@ -41,7 +48,7 @@ bool Matrix::is_square() const {
     return m_ColumnCount == m_RowCount;
 }
 
-Matrix Matrix::identity(unsigned int rowCount, unsigned int columnCount) {
+Matrix Matrix::identity(uint rowCount, uint columnCount) {
     if(rowCount != columnCount) {
         throw ProgramException("Identity matrix must be square.");
     }
@@ -59,13 +66,13 @@ Matrix Matrix::identity(unsigned int rowCount, unsigned int columnCount) {
     return m;
 }
 
-Matrix Matrix::zero(unsigned int rowCount, unsigned int columnCount) {
+Matrix Matrix::zero(uint rowCount, uint columnCount) {
     Matrix m(rowCount, columnCount);
     m.m_Empty = false;
 
-    for(unsigned int i = 0; i < rowCount; i++) 
+    for(uint i = 0; i < rowCount; i++) 
     {
-        for(unsigned int j = 0; j < columnCount; j++) 
+        for(uint j = 0; j < columnCount; j++) 
         {
             m.m_Matrix[i][j] = 0;
         }
@@ -116,9 +123,9 @@ Matrix Matrix::transpose() {
     }
 
     Matrix m = Matrix::zero(m_ColumnCount, m_RowCount);
-    for(int i = 0; i < m_RowCount; i++) 
+    for(uint i = 0; i < m_RowCount; i++) 
     {
-        for(int j = 0; j < m_ColumnCount; j++) 
+        for(uint j = 0; j < m_ColumnCount; j++) 
         {
             m.set(j, i, m_Matrix[i][j]);
         }
@@ -133,11 +140,80 @@ double Matrix::sum() const {
     }
 
     double result = 0;
-    for(int i = 0; i < m_RowCount; i++) {
-        for(int j = 0; j < m_ColumnCount; j++) {
+    for(uint i = 0; i < m_RowCount; i++) {
+        for(uint j = 0; j < m_ColumnCount; j++) {
             result += m_Matrix[i][j];
         }
     }
 
     return result;
+}
+
+Matrix Matrix::minor_complementary(uint i, uint j) {
+    if(i < 1) throw ProgramException("Row identifier must be greater than 0.");
+    if(j < 1) throw ProgramException("Column identifier must be greater than 0.");
+
+    Matrix minor(m_RowCount-1, m_ColumnCount-1);
+
+    for(uint row = 1; row <= m_RowCount; row++) 
+    {
+        if(row == i) {
+            continue;
+        }
+        
+        for(uint col = 1; col <= m_ColumnCount; col++) 
+        {
+            if(col == j) {
+                continue;
+            }
+
+            int newRow = row-1;
+            int newCol = col-1;
+
+            if(newRow < 1) newRow = 1;
+            if(newCol < 1) newCol = 1;
+
+            minor.set(newRow, newCol, at(row, col));
+        }
+    }
+
+    return minor;
+}
+
+double Matrix::determinant() {
+    if(!is_square()) {
+        throw ProgramException("Determinant is only available for square matrices.");
+    }
+
+    if(m_RowCount == 1)
+    {
+        return m_Matrix[0][0];
+    }
+
+    if(m_RowCount == 2) 
+    {
+        return (m_Matrix[0][0] * m_Matrix[1][1]) - (m_Matrix[0][1] * m_Matrix[1][0]);
+    }
+
+    // Row used to expand the matrix from
+    const uint row = m_RowCount; // the last one
+    double result = 0;
+    
+    for(uint col = 1; col <= m_ColumnCount; col++)
+    {
+        double cofactor = this->cofactor(row, col);
+        // printf("Cofactor of %dx%d is: %f\n", row, col, cofactor);
+
+        double valueAt = at(row, col);
+        result = result + (valueAt * cofactor);
+    }
+
+    return result;
+}
+
+double Matrix::cofactor(uint i, uint j) {
+    double factor = pow(-1, i+j);
+    
+    Matrix minor = this->minor_complementary(i, j);
+    return factor * minor.determinant();
 }
