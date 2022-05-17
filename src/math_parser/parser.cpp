@@ -118,6 +118,7 @@ Node* Parser::parse_unary() {
 
         // Create the unary node
         return new UnaryNode(rhs, new MathOperation("+", [](double a, double b) -> double {
+            (void)a;
             return -b;
         }));
     }

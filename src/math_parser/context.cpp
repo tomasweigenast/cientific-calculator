@@ -73,13 +73,15 @@ double DefaultContext::call_function(std::string name, double arguments[], unsig
         // TODO: add check to avoid decimal numbers in 'n' and 'i' variables
 
         // double i = arguments[0]; // desde donde empieza
-        int n = arguments[1]; // hasta donde llega la sumatoria
+        // int n = arguments[1]; // hasta donde llega la sumatoria
 
         // int results[n];
         // for(int i = arguments[0]; i < n; i++) {
             
         // }
     }
+
+    throw UnknownFunctionException(name);
 }
 
 double VariableContext::resolve_constant(std::string name) {

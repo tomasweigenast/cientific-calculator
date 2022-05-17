@@ -7,7 +7,6 @@
 #include <log.h>
 #include <app.h>
 #include <test_suite.h>
-#include <equation_system.h>
 #include <cmath>
 #include <math_parser/parser.h>
 #include <parser_exception/unexpected_char.h>
@@ -59,10 +58,9 @@ void run_test()
 int main(int argc, char *argv[])
 {
 	std::string testSuite = argv[1];
-
 	
 	// Run test suite
-	if(testSuite == "test") 
+	if(argc == 2 && testSuite == "test") 
 	{
 		TestSuite testSuite;
 		testSuite.run();

@@ -83,7 +83,7 @@ void Tokenizer::next_token() {
         try {
             this->m_Number = atof(result.c_str()); 
             this->m_Token = Number;
-        } catch(std::exception) {
+        } catch(const std::exception&) {
             throw UnexpectedCharException("Invalid number constant.");
         }
 

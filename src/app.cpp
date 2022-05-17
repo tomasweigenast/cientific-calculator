@@ -3,7 +3,6 @@
 #include <iostream>
 #include <string>
 #include <iomanip>
-#include <equation_system.h>
 
 void matrix_calculation_menu() {
 
@@ -28,11 +27,10 @@ void equation_system_menu() {
 		}
 
 		// Create equation
-		SystemEquation systemEquation(unknownsCount);
+		// SystemEquation systemEquation(unknownsCount);
 		// Node* node = new NumberNode(5);
 
-	} catch(std::invalid_argument) {
-		println("Invalid argument. Try again.");
+	} catch(const std::invalid_argument&) {
 	}
 
 }
@@ -72,7 +70,7 @@ int Application::run() {
 				default:
 					throw std::invalid_argument("invalid option");
 			}
-		} catch(std::invalid_argument) {
+		} catch(const std::invalid_argument&) {
 			println("Invalid option. Try again.");
 		}
 	}
