@@ -10,6 +10,7 @@ unsigned int Matrix::column_count() const {
 
 void Matrix::set(unsigned int i, unsigned int j, double value) {
     m_Matrix[i][j] = value;
+    m_Empty = false;
 }
 
 double Matrix::at(unsigned int i, unsigned int j) const {
@@ -18,6 +19,22 @@ double Matrix::at(unsigned int i, unsigned int j) const {
 
 bool Matrix::is_empty() const {
     return m_Empty;
+}
+
+bool Matrix::is_identity() const {
+    if(m_Empty) {
+        return false;
+    }
+
+    for(int i = 0; i < m_RowCount; i++) {
+        for(int j = 0; j < m_ColumnCount; j++) {
+            if(m_Matrix[i][j] != 0) {
+                return false;
+            }
+        }
+    }
+
+    return true;
 }
 
 Matrix Matrix::identity(unsigned int rowCount, unsigned int columnCount) {
@@ -69,4 +86,54 @@ Matrix Matrix::main_diagonal() {
     }
 
     return m;
+}
+
+Matrix Matrix::secondary_diagonal() {
+    if(m_Empty) {
+        return Matrix::zero(m_RowCount, m_ColumnCount);
+    }
+
+    Matrix m = Matrix::zero(m_RowCount, m_ColumnCount);
+    
+    uint j = m_ColumnCount-1;
+    for(uint i = 0; i < m_RowCount; i++) 
+    {
+        double value = m_Matrix[i][j];
+        m.set(i, j, value); 
+        j--;
+    }
+
+    return m;
+}
+
+Matrix Matrix::transpose() {
+    if(m_Empty) {
+        return Matrix::zero(m_RowCount, m_ColumnCount);
+    }
+
+    Matrix m = Matrix::zero(m_ColumnCount, m_RowCount);
+    for(int i = 0; i < m_RowCount; i++) 
+    {
+        for(int j = 0; j < m_ColumnCount; j++) 
+        {
+            m.set(j, i, m_Matrix[i][j]);
+        }
+    }
+
+    return m;
+}
+
+double Matrix::sum() const {
+    if(m_Empty) {
+        return 0;
+    }
+
+    double result = 0;
+    for(int i = 0; i < m_RowCount; i++) {
+        for(int j = 0; j < m_ColumnCount; j++) {
+            result += m_Matrix[i][j];
+        }
+    }
+
+    return result;
 }

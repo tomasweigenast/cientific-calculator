@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include <vector>
 #include <util/id_generator.h>
 #include <parser_exception/program_error.h>
@@ -62,39 +63,54 @@ struct  Matrix {
         unsigned int row_count() const;
         unsigned int column_count() const;
         bool is_empty() const;
+        bool is_identity() const;
         void set(unsigned int i, unsigned int j, double value);
         double at(unsigned int i, unsigned int j) const;
+        double sum() const;
         Matrix main_diagonal();
+        Matrix secondary_diagonal();
+        Matrix transpose();
 
         static Matrix identity(unsigned int rowCount, unsigned int columnCount);
         static Matrix zero(unsigned int rowCount, unsigned int columnCount);
 
         friend std::ostream& operator<<(std::ostream& stream, const Matrix& m) 
         {
-            stream << "---- Matrix(" << m.m_RowCount << "x" << m.m_ColumnCount << ") ----" << std::endl;
 
             if(m.m_Empty) 
             {
+                stream << "---- Matrix(" << m.m_RowCount << "x" << m.m_ColumnCount << ") ----" << std::endl;
                 stream << "Empty matrix." << std::endl;
+                stream << "------------------" << std::endl;
             }
             else
             {
-                for(unsigned int i = 0; i < m.m_RowCount; i++) 
-                {
-                    stream << "[";
-                    for(unsigned int j = 0; j < m.m_ColumnCount; j++) 
-                    {
-                        stream << m.at(i, j);
 
-                        if(j < m.m_ColumnCount-1) {
-                            stream << " ";
+                int width = 0;
+                /* compute the required width */
+                for (size_t i = 0; i < m.m_RowCount; i++) {
+                    for (size_t j = 0; j < m.m_ColumnCount; j++) {
+                        int w = snprintf(NULL, 0, "%.2f", m.m_Matrix[i][j]);
+                        if (width < w) {
+                            width = w;
                         }
+                    }
+                }
+
+                stream << std::endl << "Matrix(" << m.m_RowCount << "x" << m.m_ColumnCount << "):" << std::endl;
+                for (size_t i = 0; i < m.m_RowCount; i++) {
+                    stream << "[";
+                    for (size_t j = 0; j < m.m_ColumnCount; j++) {
+                        if (j != 0) {
+                            stream << ", ";
+                        }
+
+                        printf("%*.2f", width, m.m_Matrix[i][j]);
                     }
 
                     stream << "]" << std::endl;
                 }
             }
-            stream << "--------------------" << std::endl;
 
             return stream;
         } 
