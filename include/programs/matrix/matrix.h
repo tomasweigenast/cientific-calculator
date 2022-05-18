@@ -105,6 +105,8 @@ struct Matrix {
         Matrix transpose();
         Matrix minor_complementary(uint i, uint j);
 
+        bool equals_to(Matrix m) const;
+
         static Matrix identity(uint rowCount, uint columnCount);
         static Matrix zero(uint rowCount, uint columnCount);
 
@@ -148,4 +150,9 @@ struct Matrix {
 
             return stream;
         } 
+
+        bool operator==(const Matrix& matrix) const 
+        {
+            return equals_to(matrix);
+        }
 };   

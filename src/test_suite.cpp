@@ -2,6 +2,7 @@
 #include <test_suite.h>
 #include <iostream>
 #include <programs/matrix/matrix.h>
+#include <assert/assert.h>
 
 void matrix_() 
 {
@@ -71,6 +72,21 @@ void matrix_()
 	// std::cout << "Determinant: " << m7Determinant << std::endl;
 }
 
+void test_equality_comparison()
+{
+	{
+		TestCase t("same size but different values");
+		Matrix m1(5, 4);
+		Matrix m2(2, 2);
+
+		t.is_false(m1 == m2);
+
+		Matrix m3(2, 2);
+		Matrix m4(2, 2);
+		t.is_true(m3 == m4);
+	}
+}
+
 void test_matrix_emplace() 
 {
 	Matrix matrix(2, 2);
@@ -85,5 +101,5 @@ void test_matrix_emplace()
 void TestSuite::run() {
 	std::cout << "Running tests..." << std::endl;
 
-	test_matrix_emplace();
+	test_equality_comparison();
 }

@@ -249,3 +249,19 @@ double Matrix::cofactor(uint i, uint j) {
     Matrix minor = this->minor_complementary(i, j);
     return factor * minor.determinant();
 }
+
+bool Matrix::equals_to(Matrix m) const {
+    if(m_RowCount != m.m_RowCount) return false;
+    if(m_ColumnCount != m.m_ColumnCount) return false;
+    if(m_Empty && m.m_Empty) return true;
+
+    for(int i = 1; i <= m_RowCount; i++) 
+    {
+        for(int j = 1; j < m_ColumnCount; j++)
+        {
+            if(at(i, j) != m.at(i, j)) return false;
+        }
+    }
+
+    return true;
+}
