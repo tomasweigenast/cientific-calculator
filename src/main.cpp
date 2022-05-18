@@ -11,8 +11,19 @@
 #include <math_parser/parser.h>
 #include <parser_exception/unexpected_char.h>
 #include <parser_exception/unknown_constant.h>
-#include <typeinfo>
+#include <mem/alloc_metric.h> 
 
+void* operator new(size_t size)
+{
+	AllocationMetrics::instance().register_alloc(size);
+	malloc(size);
+}
+
+void operator delete(void* memory, size_t size)
+{
+	AllocationMetrics::instance().register_free(size);
+	free(memory);
+}
 
 void run_test() 
 {
