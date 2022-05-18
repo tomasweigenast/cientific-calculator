@@ -101,7 +101,7 @@ void matrix_by_matrix_()
 	std::cout << m1 << std::endl;
 	std::cout << m2 << std::endl;
 
-	Matrix result = m1.multiply(m2);
+	Matrix result = m1 * m2;
 	std::cout << result << std::endl;
 }
 

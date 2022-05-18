@@ -104,10 +104,10 @@ struct Matrix {
         Matrix secondary_diagonal();
         Matrix transpose();
         Matrix minor_complementary(uint i, uint j);
-        Matrix add(const Matrix& m);
-        Matrix subtract(const Matrix& m);
-        Matrix multiply(double factor);
-        Matrix multiply(const Matrix& m);
+        Matrix add(const Matrix& m) const;
+        Matrix subtract(const Matrix& m) const;
+        Matrix multiply(double factor) const;
+        Matrix multiply(const Matrix& m) const;
         Matrix opposite();
 
         bool equals_to(const Matrix& m) const;
@@ -159,5 +159,25 @@ struct Matrix {
         bool operator==(const Matrix& matrix) const 
         {
             return equals_to(matrix);
+        }
+
+        Matrix operator*(const Matrix& matrix) const 
+        {
+            return multiply(matrix);
+        }
+
+        Matrix operator*(double factor) const 
+        {
+            return multiply(factor);
+        }
+
+        Matrix operator+(const Matrix& matrix) const 
+        {
+            return add(matrix);
+        }
+
+        Matrix operator-(const Matrix& matrix) const 
+        {
+            return subtract(matrix);
         }
 };

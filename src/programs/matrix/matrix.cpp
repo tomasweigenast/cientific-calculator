@@ -250,7 +250,7 @@ double Matrix::cofactor(uint i, uint j) {
     return factor * minor.determinant();
 }
 
-Matrix Matrix::add(const Matrix& m) 
+Matrix Matrix::add(const Matrix& m) const
 {
     uint rowCount = 0;
     uint colCount = 0;
@@ -282,7 +282,7 @@ Matrix Matrix::add(const Matrix& m)
     return result;
 }
 
-Matrix Matrix::subtract(const Matrix& m)
+Matrix Matrix::subtract(const Matrix& m) const
 {
     uint rowCount = 0;
     uint colCount = 0;
@@ -314,7 +314,7 @@ Matrix Matrix::subtract(const Matrix& m)
     return result;
 }
 
-Matrix Matrix::multiply(double factor)
+Matrix Matrix::multiply(double factor) const
 {
     Matrix result(m_RowCount, m_ColumnCount);
     for(uint i = 1; i <= m_RowCount; i++)
@@ -329,7 +329,7 @@ Matrix Matrix::multiply(double factor)
     return result;
 }
 
-Matrix Matrix::multiply(const Matrix& m)
+Matrix Matrix::multiply(const Matrix& m) const
 {
     if(m_ColumnCount != m.m_RowCount) throw ProgramException("When multiplying two matrices, they must be conformable.");
     
