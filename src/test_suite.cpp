@@ -72,13 +72,46 @@ void matrix_()
 	// std::cout << "Determinant: " << m7Determinant << std::endl;
 }
 
+void opposite_()
+{
+	Matrix m1({
+		{1, 6, -3},
+		{6, 2.25, -3.14},
+		{7, 3.146156156, 77777},
+	}, 3);
+
+	std::cout << m1 << std::endl;
+
+	Matrix m1opposite = m1.opposite();
+	std::cout << m1opposite << std::endl;
+}
+
+void matrix_by_matrix_()
+{
+	Matrix m1({
+		{1, 6, -3},
+		{6, 2.25, -3.14},
+	}, 2);
+
+	Matrix m2({
+		{88, 2, 1},
+		{3.24, -2.564, 9},
+	}, 3);
+
+	std::cout << m1 << std::endl;
+	std::cout << m2 << std::endl;
+
+	Matrix result = m1.multiply(m2);
+	std::cout << result << std::endl;
+}
+
 void test_equality_comparison()
 {
 	{
 		TestCase t("same size but different values");
+		
 		Matrix m1(5, 4);
 		Matrix m2(2, 2);
-
 		t.is_false(m1 == m2);
 
 		Matrix m3(2, 2);
@@ -101,5 +134,6 @@ void test_matrix_emplace()
 void TestSuite::run() {
 	std::cout << "Running tests..." << std::endl;
 
-	test_equality_comparison();
+	// test_equality_comparison();
+	matrix_by_matrix_();
 }

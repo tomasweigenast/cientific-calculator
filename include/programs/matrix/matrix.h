@@ -104,8 +104,13 @@ struct Matrix {
         Matrix secondary_diagonal();
         Matrix transpose();
         Matrix minor_complementary(uint i, uint j);
+        Matrix add(const Matrix& m);
+        Matrix subtract(const Matrix& m);
+        Matrix multiply(double factor);
+        Matrix multiply(const Matrix& m);
+        Matrix opposite();
 
-        bool equals_to(Matrix m) const;
+        bool equals_to(const Matrix& m) const;
 
         static Matrix identity(uint rowCount, uint columnCount);
         static Matrix zero(uint rowCount, uint columnCount);
@@ -155,4 +160,4 @@ struct Matrix {
         {
             return equals_to(matrix);
         }
-};   
+};

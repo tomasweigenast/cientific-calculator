@@ -250,14 +250,121 @@ double Matrix::cofactor(uint i, uint j) {
     return factor * minor.determinant();
 }
 
-bool Matrix::equals_to(Matrix m) const {
+Matrix Matrix::add(const Matrix& m) 
+{
+    uint rowCount = 0;
+    uint colCount = 0;
+
+    if(m_RowCount > m.m_RowCount) rowCount = m_RowCount;
+    else rowCount = m.m_RowCount;
+
+    if(m_ColumnCount > m.m_ColumnCount) colCount = m_ColumnCount;
+    else colCount = m.m_ColumnCount;
+
+    Matrix result = Matrix::zero(rowCount, colCount);
+    for(uint i = 1; i < m_RowCount; i++)
+    {
+        for(uint j = 1; j < m_ColumnCount; j++)
+        {
+            try 
+            {
+                double thisVal = at(i, j);
+                double otherVal = m.at(i, j);
+                result.set(i, j, thisVal+otherVal);
+            }
+            catch(const std::exception&)
+            {
+                result.set(i, j, 0);
+            }
+        }
+    }
+
+    return result;
+}
+
+Matrix Matrix::subtract(const Matrix& m)
+{
+    uint rowCount = 0;
+    uint colCount = 0;
+
+    if(m_RowCount > m.m_RowCount) rowCount = m_RowCount;
+    else rowCount = m.m_RowCount;
+
+    if(m_ColumnCount > m.m_ColumnCount) colCount = m_ColumnCount;
+    else colCount = m.m_ColumnCount;
+
+    Matrix result = Matrix::zero(rowCount, colCount);
+    for(uint i = 1; i < m_RowCount; i++)
+    {
+        for(uint j = 1; j < m_ColumnCount; j++)
+        {
+            try 
+            {
+                double thisVal = at(i, j);
+                double otherVal = m.at(i, j);
+                result.set(i, j, thisVal-otherVal);
+            }
+            catch(const std::exception&)
+            {
+                result.set(i, j, 0);
+            }
+        }
+    }
+
+    return result;
+}
+
+Matrix Matrix::multiply(double factor)
+{
+    Matrix result(m_RowCount, m_ColumnCount);
+    for(uint i = 1; i <= m_RowCount; i++)
+    {
+        for(uint j = 1; j <= m_ColumnCount; j++)
+        {
+            double value = at(i, j);
+            result.set(i, j, value * factor);
+        }
+    }
+
+    return result;
+}
+
+Matrix Matrix::multiply(const Matrix& m)
+{
+    if(m_ColumnCount != m.m_RowCount) throw ProgramException("When multiplying two matrices, they must be conformable.");
+    
+    Matrix result(m_RowCount, m.m_ColumnCount);
+    result.m_Empty = false;
+
+    double temp = 0;
+    for(uint i = 0; i < m_RowCount; i++)
+    {
+        for(uint j = 0; j < m.m_ColumnCount; j++)
+        {
+            temp = 0;
+            for(uint k = 0; k < m_ColumnCount; k++)
+                temp += m_Matrix[i][k] * m.m_Matrix[k][j];
+
+            result.m_Matrix[i][j] = temp;
+        }
+    }
+
+    return result;
+}
+
+Matrix Matrix::opposite()
+{
+    return multiply(-1);
+}
+
+bool Matrix::equals_to(const Matrix& m) const {
     if(m_RowCount != m.m_RowCount) return false;
     if(m_ColumnCount != m.m_ColumnCount) return false;
     if(m_Empty && m.m_Empty) return true;
 
-    for(int i = 1; i <= m_RowCount; i++) 
+    for(uint i = 1; i <= m_RowCount; i++) 
     {
-        for(int j = 1; j < m_ColumnCount; j++)
+        for(uint j = 1; j < m_ColumnCount; j++)
         {
             if(at(i, j) != m.at(i, j)) return false;
         }
