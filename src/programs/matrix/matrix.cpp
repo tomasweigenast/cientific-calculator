@@ -49,6 +49,14 @@ void Matrix::emplace(double value) {
     m_NextEmptyPos->set(i, j);
 }
 
+void Matrix::emplace(const std::initializer_list<double>& values) 
+{
+    for(auto v : values)
+    {
+        this->emplace(v);
+    }
+}
+
 double Matrix::at(uint i, uint j) const {
     if(i < 1) throw ProgramException("Row identifier must be greater than 0.");
     if(j < 1) throw ProgramException("Column identifier must be greater than 0.");
@@ -326,6 +334,7 @@ Matrix Matrix::multiply(double factor) const
         }
     }
 
+    std::cout << "returning result" << std::endl;
     return result;
 }
 
@@ -349,6 +358,7 @@ Matrix Matrix::multiply(const Matrix& m) const
         }
     }
 
+    std::cout << "returning result" << std::endl;
     return result;
 }
 

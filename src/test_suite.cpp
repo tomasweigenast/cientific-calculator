@@ -105,6 +105,21 @@ void matrix_by_matrix_()
 	std::cout << result << std::endl;
 }
 
+void matrix_by_matrix_less_alloc_()
+{
+	Matrix m1(2, 3);
+	m1.emplace({1, 6, -2, 6, 2.25, -3.14});
+
+	Matrix m2(3, 3);
+	m2.emplace({88, 2, 1, 3.24, -2.564, 9, 92.21, 6, 0.23});
+
+	std::cout << m1 << std::endl;
+	std::cout << m2 << std::endl;
+
+	Matrix result = m1 * m2;
+	std::cout << result << std::endl;
+}
+
 void test_equality_comparison()
 {
 	{
@@ -135,5 +150,6 @@ void TestSuite::run() {
 	std::cout << "Running tests..." << std::endl;
 
 	// test_equality_comparison();
-	matrix_by_matrix_();
+	matrix_by_matrix_less_alloc_();
+	// matrix_by_matrix_();
 }

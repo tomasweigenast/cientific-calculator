@@ -8,7 +8,7 @@ make: *** No rule to make target 'src/test_suite.o', needed by 'main'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Wed May 18 13:26:41 2022
+# Make data base, printed on Wed May 18 16:57:30 2022
 
 # Variables
 
@@ -37,7 +37,7 @@ VSCODE_LOG_NATIVE = false
 # environment
 IM_CONFIG_PHASE = 1
 # makefile (from 'Makefile', line 54)
-INCLUDES := -Iinclude -Iinclude/math_parser -Iinclude/parser_exception -Iinclude/util -Iinclude/data -Iinclude/programs -Iinclude/programs/matrix -Iinclude/assert
+INCLUDES := -Iinclude -Iinclude/math_parser -Iinclude/parser_exception -Iinclude/util -Iinclude/data -Iinclude/mem -Iinclude/programs -Iinclude/programs/matrix -Iinclude/assert
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
 # environment
@@ -69,7 +69,7 @@ GIO_LAUNCHED_DESKTOP_FILE = /home/tomas/Escritorio/code.desktop
 # environment
 USERNAME = tomas
 # makefile (from 'Makefile', line 60)
-SOURCES := src/test_suite.cpp src/log.cpp src/main.cpp src/equation_system.cpp src/app.cpp src/math_parser/tokenizer.cpp src/math_parser/operation.cpp src/math_parser/node.cpp src/math_parser/parser.cpp src/math_parser/context.cpp src/util/id_generator.cpp src/data/pos.cpp src/programs/matrix/matrix.cpp src/assert/assert.cpp
+SOURCES := src/test_suite.cpp src/log.cpp src/main.cpp src/equation_system.cpp src/app.cpp src/math_parser/tokenizer.cpp src/math_parser/operation.cpp src/math_parser/node.cpp src/math_parser/parser.cpp src/math_parser/context.cpp src/util/id_generator.cpp src/data/pos.cpp src/mem/alloc_metric.cpp src/programs/matrix/matrix.cpp src/assert/assert.cpp
 # makefile (from 'Makefile', line 10)
 CXXFLAGS := -std=gnu++2a -Wall -Wextra -g
 # environment
@@ -127,7 +127,7 @@ XDG_SESSION_DESKTOP = zorin
 # environment
 SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 47562
+GIO_LAUNCHED_DESKTOP_FILE_PID = 79728
 # automatic
 %F = $(notdir $%)
 # environment
@@ -165,7 +165,7 @@ APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # automatic
 +F = $(notdir $+)
 # makefile (from 'Makefile', line 46)
-INCLUDEDIRS := include include/math_parser include/parser_exception include/util include/data include/programs include/programs/matrix include/assert
+INCLUDEDIRS := include include/math_parser include/parser_exception include/util include/data include/mem include/programs include/programs/matrix include/assert
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # environment
@@ -191,7 +191,7 @@ FIXPATH = $1
 # environment
 GNOME_SHELL_SESSION_MODE = zorin
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-ecae32c8-8735-48ce-bca2-2235bb335cc7.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-b5a3fcd1-5a89-4e22-aed0-3db8658394d1.sock
 # default
 MAKE_VERSION := 4.2.1
 # environment
@@ -233,7 +233,7 @@ MAIN := main
 # environment
 GDK_BACKEND = x11
 # makefile (from 'Makefile', line 45)
-SOURCEDIRS := src src/math_parser src/util src/data src/programs src/programs/matrix src/assert
+SOURCEDIRS := src src/math_parser src/util src/data src/mem src/programs src/programs/matrix src/assert
 # environment
 LC_PAPER = es_AR.UTF-8
 # environment
@@ -275,14 +275,14 @@ LC_IDENTIFICATION = es_AR.UTF-8
 # default
 .RECIPEPREFIX := 
 # makefile (from 'Makefile', line 63)
-OBJECTS := src/test_suite.o src/log.o src/main.o src/equation_system.o src/app.o src/math_parser/tokenizer.o src/math_parser/operation.o src/math_parser/node.o src/math_parser/parser.o src/math_parser/context.o src/util/id_generator.o src/data/pos.o src/programs/matrix/matrix.o src/assert/assert.o
+OBJECTS := src/test_suite.o src/log.o src/main.o src/equation_system.o src/app.o src/math_parser/tokenizer.o src/math_parser/operation.o src/math_parser/node.o src/math_parser/parser.o src/math_parser/context.o src/util/id_generator.o src/data/pos.o src/mem/alloc_metric.o src/programs/matrix/matrix.o src/assert/assert.o
 # environment
 LC_ADDRESS = es_AR.UTF-8
-# environment
  
+# environment
 LANG = C
 # environment
-VSCODE_PID = 47562
+VSCODE_PID = 79728
 # variable set hash-table stats:
 # Load=135/1024=13%, Rehash=0, Collisions=23/188=12%
 
@@ -294,14 +294,15 @@ VSCODE_PID = 47562
 
 # src/programs (device 66311, inode 10225506): 3 files, no impossibilities.
 # . (device 66311, inode 6687760): 12 files, no impossibilities.
+# src/mem (device 66311, inode 9831143): 3 files, no impossibilities.
 # src/data (device 66311, inode 10225790): 3 files, no impossibilities.
-# src (device 66311, inode 7214753): 12 files, no impossibilities.
+# src (device 66311, inode 7214753): 13 files, no impossibilities.
 # src/assert (device 66311, inode 7214675): 3 files, no impossibilities.
 # src/programs/matrix (device 66311, inode 10225507): 3 files, no impossibilities.
 # src/util (device 66311, inode 8783782): 3 files, no impossibilities.
 # src/math_parser (device 66311, inode 7214529): 7 files, no impossibilities.
 
-# 46 files, no impossibilities in 8 directories.
+# 50 files, no impossibilities in 9 directories.
 
 # Implicit Rules
 
@@ -317,6 +318,12 @@ src/math_parser/tokenizer.o:
 
 # Not a target:
 src/data/pos.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+src/mem/alloc_metric.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -432,7 +439,7 @@ src/app.o:
 #  Modification time never checked.
 #  File has not been updated.
 
-main: src/test_suite.o src/log.o src/main.o src/equation_system.o src/app.o src/math_parser/tokenizer.o src/math_parser/operation.o src/math_parser/node.o src/math_parser/parser.o src/math_parser/context.o src/util/id_generator.o src/data/pos.o src/programs/matrix/matrix.o src/assert/assert.o
+main: src/test_suite.o src/log.o src/main.o src/equation_system.o src/app.o src/math_parser/tokenizer.o src/math_parser/operation.o src/math_parser/node.o src/math_parser/parser.o src/math_parser/context.o src/util/id_generator.o src/data/pos.o src/mem/alloc_metric.o src/programs/matrix/matrix.o src/assert/assert.o
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
@@ -441,7 +448,7 @@ main: src/test_suite.o src/log.o src/main.o src/equation_system.o src/app.o src/
 
 output:
 #  Implicit rule search has not been done.
-#  Last modified 2022-05-18 09:37:55.44951161
+#  Last modified 2022-05-18 16:46:00.999610844
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 77):
@@ -460,20 +467,19 @@ src/equation_system.o:
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=24/1024=2%, Rehash=0, Collisions=0/56=0%
+# Load=25/1024=2%, Rehash=0, Collisions=0/58=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 62 / storage = 741 B / avg = 11 B
-# current buf: size = 8162 B / used = 741 B / count = 62 / avg = 11 B
+# strcache buffers: 1 (0) / strings = 66 / storage = 793 B / avg = 12 B
+# current buf: size = 8162 B / used = 793 B / count = 66 / avg = 12 B
 
-# strcache performance: lookups = 94 / hit rate = 34%
+# strcache performance: lookups = 100 / hit rate = 34%
 # hash-table stats:
- 
-# Load=62/8192=1%, Rehash=0, Collisions=8/94=9%
-# Finished Make data base on Wed May 18 13:26:41 2022
+# Load=66/8192=1%, Rehash=0, Collisions=9/100=9%
+# Finished Make data base on Wed May 18 16:57:30 2022
 
  

@@ -14,8 +14,6 @@ struct Matrix {
         Pos* m_NextEmptyPos;
         bool m_CanEmplace;
 
-        std::string m_Id;
-
         void initialize_() {
             m_Matrix = new double*[m_RowCount];
             for(uint i = 0; i < m_RowCount; i++) {
@@ -30,8 +28,7 @@ struct Matrix {
                 m_ColumnCount(other.m_ColumnCount), 
                 m_Empty(other.m_Empty),
                 m_NextEmptyPos(other.m_NextEmptyPos),
-                m_CanEmplace(other.m_CanEmplace), 
-                m_Id(random_id()) 
+                m_CanEmplace(other.m_CanEmplace)
         {
             initialize_();
             for(uint i = 0; i < other.m_RowCount; i++) {
@@ -40,14 +37,15 @@ struct Matrix {
                     this->m_Matrix[i][j] = value;
                 }
             }
+
+            std::cout << "Matrix copied." << std::endl; 
         }
         Matrix(uint rowCount, uint columnCount) 
             :   m_RowCount(rowCount), 
                 m_ColumnCount(columnCount), 
                 m_Empty(true),
                 m_NextEmptyPos(new Pos(1, 1)),
-                m_CanEmplace(true), 
-                m_Id(random_id()) 
+                m_CanEmplace(true)
         {
             initialize_();
         }
@@ -56,8 +54,7 @@ struct Matrix {
                 m_ColumnCount(colCount), 
                 m_Empty(false),
                 m_NextEmptyPos(nullptr),
-                m_CanEmplace(false),
-                m_Id(random_id()) 
+                m_CanEmplace(false)
         {
             uint i = 0;
             
@@ -94,6 +91,7 @@ struct Matrix {
         bool is_square() const;
         void set(uint i, uint j, double value); // 1-index base
         void emplace(double value);
+        void emplace(const std::initializer_list<double>& values);
         double at(uint i, uint j) const; // 1-index base
         double sum() const;
         double determinant();
@@ -155,27 +153,22 @@ struct Matrix {
 
             return stream;
         } 
-
         bool operator==(const Matrix& matrix) const 
         {
             return equals_to(matrix);
         }
-
         Matrix operator*(const Matrix& matrix) const 
         {
             return multiply(matrix);
         }
-
         Matrix operator*(double factor) const 
         {
             return multiply(factor);
         }
-
         Matrix operator+(const Matrix& matrix) const 
         {
             return add(matrix);
         }
-
         Matrix operator-(const Matrix& matrix) const 
         {
             return subtract(matrix);
