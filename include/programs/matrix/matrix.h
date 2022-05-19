@@ -1,16 +1,16 @@
 #include <iostream>
 #include <iomanip>
 #include <vector>
-#include <util/id_generator.h>
 #include <parser_exception/program_error.h>
 #include <data/pos.h>
 #include <mem/alloc_metric.h>
+#include <app.h>
 
 struct Matrix {
     private:
         uint m_RowCount;
         uint m_ColumnCount;
-        double** m_Matrix;
+        DATATYPE* m_Matrix;
         bool m_Empty;
         Pos* m_NextEmptyPos;
         bool m_CanEmplace;
@@ -19,10 +19,7 @@ struct Matrix {
             if(m_RowCount < 1) throw ProgramException("Row count must be greater than 0.");
             if(m_ColumnCount < 1) throw ProgramException("Column count must be greater than 0.");
 
-            m_Matrix = new double*[m_RowCount];
-            for(uint i = 0; i < m_RowCount; i++) {
-                m_Matrix[i] = new double[m_ColumnCount];
-            }
+            m_Matrix = new DATATYPE[m_RowCount * m_ColumnCount];
         }
 
     public:
@@ -37,8 +34,8 @@ struct Matrix {
             initialize_();
             for(uint i = 0; i < other.m_RowCount; i++) {
                 for(uint j = 0; j < other.m_ColumnCount; j++) {
-                    double value = other.m_Matrix[i][j];
-                    this->m_Matrix[i][j] = value;
+                    DATATYPE value = other.m_Matrix[i + j * other.m_RowCount];
+                    this->m_Matrix[i + j * m_RowCount] = value;
                 }
             }
 
@@ -53,39 +50,14 @@ struct Matrix {
         {
             initialize_();
         }
-        Matrix(const std::vector<std::vector<double>>& rows, uint colCount) 
-            :   m_RowCount(rows.size()), 
-                m_ColumnCount(colCount), 
-                m_Empty(false),
-                m_NextEmptyPos(nullptr),
-                m_CanEmplace(false)
-        {
-            uint i = 0;
-            
-            // Create initial matrix to hold "rows.size()" rows
-            m_Matrix = new double*[m_RowCount];
-
-            for(std::vector<double> cols : rows) 
-            {
-                // Create array to hold columns
-                m_Matrix[i] = new double[cols.size()];
-
-                uint j = 0;
-                for(double value : cols) {
-                    m_Matrix[i][j] = value;
-                    j++;
-                }
-
-                i++;
-            }
-        }
+        // Matrix(const std::vector<std::vector<double>>& rows, uint colCount) 
+        //     :   m_RowCount(rows.size()), 
+        //         m_ColumnCount(colCount), 
+        //         m_Empty(false),
+        //         m_NextEmptyPos(nullptr),
+        //         m_CanEmplace(false),
+        //         m_Matrix(rows){}
         ~Matrix() {
-            AllocationMetrics::instance().register_free(sizeof(m_Matrix));
-
-            for(uint i = 0; i < m_RowCount; ++i) {
-                delete[] m_Matrix[i];
-            }
-
             delete[] m_Matrix;
             
             if(m_CanEmplace)
@@ -97,13 +69,13 @@ struct Matrix {
         bool is_empty() const;
         bool is_identity() const;
         bool is_square() const;
-        void set(uint i, uint j, double value); // 1-index base
-        void emplace(double value);
-        void emplace(const std::initializer_list<double>& values);
-        double at(uint i, uint j) const; // 1-index base
-        double sum() const;
-        double determinant();
-        double cofactor(uint i, uint j);
+        void set(uint i, uint j, DATATYPE value); // 1-index base
+        void emplace(DATATYPE value);
+        void emplace(const std::initializer_list<DATATYPE>& values);
+        DATATYPE at(uint i, uint j) const; // 1-index base
+        DATATYPE sum() const;
+        DATATYPE determinant();
+        DATATYPE cofactor(uint i, uint j);
         // std::vector<uint> rows() const;
         // std::vector<uint> columns() const;
         Matrix main_diagonal();
@@ -112,7 +84,7 @@ struct Matrix {
         Matrix minor_complementary(uint i, uint j);
         Matrix add(const Matrix& m) const;
         Matrix subtract(const Matrix& m) const;
-        Matrix multiply(double factor) const;
+        Matrix multiply(DATATYPE factor) const;
         Matrix multiply(const Matrix& m) const;
         Matrix opposite();
 
@@ -137,7 +109,7 @@ struct Matrix {
                 /* compute the required width */
                 for (size_t i = 0; i < m.m_RowCount; i++) {
                     for (size_t j = 0; j < m.m_ColumnCount; j++) {
-                        int w = snprintf(NULL, 0, "%.2f", m.m_Matrix[i][j]);
+                        int w = snprintf(NULL, 0, "%.2f", m.m_Matrix[i + j * m.m_RowCount]);
                         if (width < w) {
                             width = w;
                         }
@@ -152,7 +124,7 @@ struct Matrix {
                             stream << ", ";
                         }
 
-                        printf("%*.2f", width, m.m_Matrix[i][j]);
+                        printf("%*.2f", width, m.m_Matrix[i + j * m.m_RowCount]);
                     }
 
                     stream << "]" << std::endl;
@@ -169,7 +141,7 @@ struct Matrix {
         {
             return multiply(matrix);
         }
-        Matrix operator*(double factor) const 
+        Matrix operator*(DATATYPE factor) const 
         {
             return multiply(factor);
         }

@@ -69,7 +69,7 @@ void run_test()
 int main(int argc, char *argv[])
 {
 	std::string testSuite = argv[1];
-	
+
 	// Run test suite
 	if(argc == 2 && testSuite == "test") 
 	{

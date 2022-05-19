@@ -1,6 +1,4 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
-make: *** No rule to make target 'src/test_suite.o', needed by 'main'.  Stop.
-
 # GNU Make 4.2.1
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2016 Free Software Foundation, Inc.
@@ -8,7 +6,7 @@ make: *** No rule to make target 'src/test_suite.o', needed by 'main'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Wed May 18 16:57:30 2022
+# Make data base, printed on Thu May 19 12:04:22 2022
 
 # Variables
 
@@ -57,7 +55,7 @@ VSCODE_NLS_CONFIG = {"locale":"en-gb","availableLanguages":{},"_languagePackSupp
 # environment
 _ = /usr/share/code/code
 # environment
-JOURNAL_STREAM = 8:52404
+JOURNAL_STREAM = 8:51589
 # environment
 XDG_CONFIG_DIRS = /etc/xdg/xdg-zorin:/etc/xdg
 # makefile (from 'Makefile', line 1)
@@ -65,7 +63,7 @@ MAKEFILE_LIST :=  Makefile
 # automatic
 @F = $(notdir $@)
 # environment
-GIO_LAUNCHED_DESKTOP_FILE = /home/tomas/Escritorio/code.desktop
+GIO_LAUNCHED_DESKTOP_FILE = /usr/share/applications/code.desktop
 # environment
 USERNAME = tomas
 # makefile (from 'Makefile', line 60)
@@ -83,7 +81,7 @@ DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-MANAGERPID = 1553
+MANAGERPID = 1611
 # environment
 LESSOPEN = | /usr/bin/lesspipe %s
 # environment
@@ -101,7 +99,7 @@ GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-SESSION_MANAGER = local/tomas-laptop-envy:@/tmp/.ICE-unix/2177,unix/tomas-laptop-envy:/tmp/.ICE-unix/2177
+SESSION_MANAGER = local/tomas-laptop-envy:@/tmp/.ICE-unix/2623,unix/tomas-laptop-envy:/tmp/.ICE-unix/2623
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
@@ -115,7 +113,7 @@ VSCODE_LOG_STACK = false
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-INVOCATION_ID = ffb1ba383f6644a1b124e2642e9e84fa
+INVOCATION_ID = 58f669a57d05479ba19fc8ab1d357b3d
 # makefile (from 'Makefile', line 29)
 LIB := lib
 # default
@@ -127,7 +125,7 @@ XDG_SESSION_DESKTOP = zorin
 # environment
 SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 79728
+GIO_LAUNCHED_DESKTOP_FILE_PID = 43418
 # automatic
 %F = $(notdir $%)
 # environment
@@ -145,7 +143,7 @@ OUTPUTMAIN := output/main
 # default
 .LOADED := 
 # environment
-SSH_AGENT_PID = 2149
+SSH_AGENT_PID = 2595
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = zorin:GNOME
 # environment
@@ -191,7 +189,7 @@ FIXPATH = $1
 # environment
 GNOME_SHELL_SESSION_MODE = zorin
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-b5a3fcd1-5a89-4e22-aed0-3db8658394d1.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-5b66bbc7-4229-49e9-91b2-1a2ec4d2471e.sock
 # default
 MAKE_VERSION := 4.2.1
 # environment
@@ -278,13 +276,12 @@ LC_IDENTIFICATION = es_AR.UTF-8
 OBJECTS := src/test_suite.o src/log.o src/main.o src/equation_system.o src/app.o src/math_parser/tokenizer.o src/math_parser/operation.o src/math_parser/node.o src/math_parser/parser.o src/math_parser/context.o src/util/id_generator.o src/data/pos.o src/mem/alloc_metric.o src/programs/matrix/matrix.o src/assert/assert.o
 # environment
 LC_ADDRESS = es_AR.UTF-8
- 
 # environment
 LANG = C
 # environment
-VSCODE_PID = 79728
+VSCODE_PID = 43418
 # variable set hash-table stats:
-# Load=135/1024=13%, Rehash=0, Collisions=23/188=12%
+# Load=135/1024=13%, Rehash=0, Collisions=23/198=12%
 
 # Pattern-specific Variable Values
 
@@ -292,17 +289,18 @@ VSCODE_PID = 79728
 
 # Directories
 
+ 
 # src/programs (device 66311, inode 10225506): 3 files, no impossibilities.
 # . (device 66311, inode 6687760): 12 files, no impossibilities.
-# src/mem (device 66311, inode 9831143): 3 files, no impossibilities.
-# src/data (device 66311, inode 10225790): 3 files, no impossibilities.
-# src (device 66311, inode 7214753): 13 files, no impossibilities.
-# src/assert (device 66311, inode 7214675): 3 files, no impossibilities.
-# src/programs/matrix (device 66311, inode 10225507): 3 files, no impossibilities.
-# src/util (device 66311, inode 8783782): 3 files, no impossibilities.
-# src/math_parser (device 66311, inode 7214529): 7 files, no impossibilities.
+# src/mem (device 66311, inode 9831143): 4 files, no impossibilities.
+# src/data (device 66311, inode 10225790): 4 files, no impossibilities.
+# src (device 66311, inode 7214753): 18 files, no impossibilities.
+# src/assert (device 66311, inode 7214675): 4 files, no impossibilities.
+# src/programs/matrix (device 66311, inode 10225507): 4 files, no impossibilities.
+# src/util (device 66311, inode 8783782): 4 files, no impossibilities.
+# src/math_parser (device 66311, inode 7214529): 12 files, no impossibilities.
 
-# 50 files, no impossibilities in 9 directories.
+# 65 files, no impossibilities in 9 directories.
 
 # Implicit Rules
 
@@ -312,27 +310,33 @@ VSCODE_PID = 79728
 
 # Not a target:
 src/math_parser/tokenizer.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-05-18 22:07:14.482880383
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 src/data/pos.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-05-18 22:07:16.466867577
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 src/mem/alloc_metric.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-05-18 22:07:16.79086548
+#  File has been updated.
+#  Successfully updated.
 
 all: output main
 #  Command line target.
 #  Implicit rule search has not been done.
 #  File does not exist.
-#  File has not been updated.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/10=0%
 #  recipe to execute (from 'Makefile', line 74):
 	@echo Executing 'all' complete!
 
@@ -343,21 +347,30 @@ all: output main
 
 # Not a target:
 src/programs/matrix/matrix.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-05-18 22:07:17.350861849
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 src/main.o:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-18 22:07:13.802884757
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.SUFFIXES:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
 src/math_parser/parser.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-05-18 22:07:15.814871794
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 Makefile:
@@ -368,33 +381,38 @@ Makefile:
 
 # Not a target:
 src/log.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-05-18 22:07:13.202888608
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 src/assert/assert.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-05-18 22:07:17.598860239
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 src/math_parser/operation.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-05-18 22:07:14.81887822
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 src/test_suite.o:
 #  Implicit rule search has been done.
-#  File does not exist.
-#  File has not been updated.
+#  Last modified 2022-05-18 22:07:12.91889043
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 src/math_parser/context.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-05-18 22:07:16.190869364
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 .DEFAULT:
@@ -404,9 +422,10 @@ src/math_parser/context.o:
 
 # Not a target:
 src/math_parser/node.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-05-18 22:07:15.278875254
+#  File has been updated.
+#  Successfully updated.
 
 run: all
 #  Implicit rule search has not been done.
@@ -435,20 +454,41 @@ clean:
 
 # Not a target:
 src/app.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-05-18 22:07:14.158882468
+#  File has been updated.
+#  Successfully updated.
 
 main: src/test_suite.o src/log.o src/main.o src/equation_system.o src/app.o src/math_parser/tokenizer.o src/math_parser/operation.o src/math_parser/node.o src/math_parser/parser.o src/math_parser/context.o src/util/id_generator.o src/data/pos.o src/mem/alloc_metric.o src/programs/matrix/matrix.o src/assert/assert.o
 #  Implicit rule search has not been done.
+#  Implicit/static pattern stem: ''
 #  File does not exist.
-#  File has not been updated.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := main
+# automatic
+# % := 
+# automatic
+# * := 
+# automatic
+# + := src/test_suite.o src/log.o src/main.o src/equation_system.o src/app.o src/math_parser/tokenizer.o src/math_parser/operation.o src/math_parser/node.o src/math_parser/parser.o src/math_parser/context.o src/util/id_generator.o src/data/pos.o src/mem/alloc_metric.o src/programs/matrix/matrix.o src/assert/assert.o
+# automatic
+# | := 
+# automatic
+# < := src/test_suite.o
+# automatic
+# ^ := src/test_suite.o src/log.o src/main.o src/equation_system.o src/app.o src/math_parser/tokenizer.o src/math_parser/operation.o src/math_parser/node.o src/math_parser/parser.o src/math_parser/context.o src/util/id_generator.o src/data/pos.o src/mem/alloc_metric.o src/programs/matrix/matrix.o src/assert/assert.o
+# automatic
+# ? := src/test_suite.o src/log.o src/main.o src/equation_system.o src/app.o src/math_parser/tokenizer.o src/math_parser/operation.o src/math_parser/node.o src/math_parser/parser.o src/math_parser/context.o src/util/id_generator.o src/data/pos.o src/mem/alloc_metric.o src/programs/matrix/matrix.o src/assert/assert.o
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=2/18=11%
 #  recipe to execute (from 'Makefile', line 80):
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -o $(OUTPUTMAIN) $(OBJECTS) $(LFLAGS) $(LIBS)
 
 output:
 #  Implicit rule search has not been done.
-#  Last modified 2022-05-18 16:46:00.999610844
+#  Last modified 2022-05-18 22:08:13.078473523
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 77):
@@ -456,30 +496,32 @@ output:
 
 # Not a target:
 src/util/id_generator.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-05-18 22:07:16.454867655
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 src/equation_system.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-05-18 22:07:13.810884706
+#  File has been updated.
+#  Successfully updated.
 
 # files hash-table stats:
-# Load=25/1024=2%, Rehash=0, Collisions=0/58=0%
+# Load=25/1024=2%, Rehash=0, Collisions=0/59=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 66 / storage = 793 B / avg = 12 B
-# current buf: size = 8162 B / used = 793 B / count = 66 / avg = 12 B
+# strcache buffers: 1 (0) / strings = 81 / storage = 947 B / avg = 11 B
+# current buf: size = 8162 B / used = 947 B / count = 81 / avg = 11 B
 
-# strcache performance: lookups = 100 / hit rate = 34%
+# strcache performance: lookups = 116 / hit rate = 30%
 # hash-table stats:
-# Load=66/8192=1%, Rehash=0, Collisions=9/100=9%
-# Finished Make data base on Wed May 18 16:57:30 2022
+# Load=81/8192=1%, Rehash=0, Collisions=9/116=8%
+# Finished Make data base on Thu May 19 12:04:22 2022
 
  

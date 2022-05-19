@@ -9,22 +9,22 @@ uint Matrix::column_count() const {
     return m_ColumnCount;
 }
 
-void Matrix::set(uint i, uint j, double value) {
+void Matrix::set(uint i, uint j, DATATYPE value) {
     if(i < 1) throw ProgramException("Row identifier must be greater than 0.");
     if(j < 1) throw ProgramException("Column identifier must be greater than 0.");
     
-    m_Matrix[i-1][j-1] = value;
+    m_Matrix[(i-1) + (j-1) * m_RowCount] = value;
     m_Empty = false;
     m_CanEmplace = false;
 }
 
-void Matrix::emplace(double value) {
+void Matrix::emplace(DATATYPE value) {
     if(!m_CanEmplace) throw ProgramException("emplace can only be called if the Matrix is empty.");
     
     uint i = m_NextEmptyPos->get_i();
     uint j = m_NextEmptyPos->get_j();
 
-    m_Matrix[i-1][j-1] = value;
+    m_Matrix[(i-1) + (j-1) * m_RowCount] = value;
     
     if(j < m_ColumnCount) // there are columns available 
     {
@@ -50,7 +50,7 @@ void Matrix::emplace(double value) {
     m_NextEmptyPos->set(i, j);
 }
 
-void Matrix::emplace(const std::initializer_list<double>& values) 
+void Matrix::emplace(const std::initializer_list<DATATYPE>& values) 
 {
     for(auto v : values)
     {
@@ -58,11 +58,11 @@ void Matrix::emplace(const std::initializer_list<double>& values)
     }
 }
 
-double Matrix::at(uint i, uint j) const {
+DATATYPE Matrix::at(uint i, uint j) const {
     if(i < 1) throw ProgramException("Row identifier must be greater than 0.");
     if(j < 1) throw ProgramException("Column identifier must be greater than 0.");
 
-    return m_Matrix[i-1][j-1];
+    return m_Matrix[(i-1) + (j-1) * m_RowCount];
 }
 
 bool Matrix::is_empty() const {
@@ -76,7 +76,7 @@ bool Matrix::is_identity() const {
 
     for(uint i = 0; i < m_RowCount; i++) {
         for(uint j = 0; j < m_ColumnCount; j++) {
-            if(m_Matrix[i][j] != 0) {
+            if(m_Matrix[i + j * m_RowCount] != 0) {
                 return false;
             }
         }
@@ -100,7 +100,7 @@ Matrix Matrix::identity(uint rowCount, uint columnCount) {
     uint j = 0;
     for(uint i = 0; i < rowCount; i++) 
     {
-        m.m_Matrix[i][j] = 1;
+        m.m_Matrix[i + j * rowCount] = 1;
         j++;
     }
 
@@ -115,7 +115,7 @@ Matrix Matrix::zero(uint rowCount, uint columnCount) {
     {
         for(uint j = 0; j < columnCount; j++) 
         {
-            m.m_Matrix[i][j] = 0;
+            m.m_Matrix[i + j * rowCount] = 0;
         }
     }
 
@@ -132,7 +132,7 @@ Matrix Matrix::main_diagonal() {
     uint j = 0;
     for(uint i = 0; i < m_RowCount; i++) 
     {
-        double value = m_Matrix[i][j];
+        DATATYPE value = m_Matrix[i + j * m_RowCount];
         m.set(i, j, value); 
         j++;
     }
@@ -150,7 +150,7 @@ Matrix Matrix::secondary_diagonal() {
     uint j = m_ColumnCount-1;
     for(uint i = 0; i < m_RowCount; i++) 
     {
-        double value = m_Matrix[i][j];
+        DATATYPE value = m_Matrix[i + j * m_RowCount];
         m.set(i, j, value); 
         j--;
     }
@@ -168,22 +168,22 @@ Matrix Matrix::transpose() {
     {
         for(uint j = 0; j < m_ColumnCount; j++) 
         {
-            m.set(j, i, m_Matrix[i][j]);
+            m.set(j, i, m_Matrix[i + j * m_RowCount]);
         }
     }
 
     return m;
 }
 
-double Matrix::sum() const {
+DATATYPE Matrix::sum() const {
     if(m_Empty) {
         return 0;
     }
 
-    double result = 0;
+    DATATYPE result = 0;
     for(uint i = 0; i < m_RowCount; i++) {
         for(uint j = 0; j < m_ColumnCount; j++) {
-            result += m_Matrix[i][j];
+            result += m_Matrix[i + j * m_RowCount];
         }
     }
 
@@ -221,39 +221,39 @@ Matrix Matrix::minor_complementary(uint i, uint j) {
     return minor;
 }
 
-double Matrix::determinant() {
+DATATYPE Matrix::determinant() {
     if(!is_square()) {
         throw ProgramException("Determinant is only available for square matrices.");
     }
 
     if(m_RowCount == 1)
     {
-        return m_Matrix[0][0];
+        return m_Matrix[0];
     }
 
     if(m_RowCount == 2) 
     {
-        return (m_Matrix[0][0] * m_Matrix[1][1]) - (m_Matrix[0][1] * m_Matrix[1][0]);
+        return (m_Matrix[0] * m_Matrix[1 + 1 * m_RowCount]) - (m_Matrix[0 + 1 * m_RowCount] * m_Matrix[1 + 0 * m_RowCount]);
     }
 
     // Row used to expand the matrix from
     const uint row = m_RowCount; // the last one
-    double result = 0;
+    DATATYPE result = 0;
     
     for(uint col = 1; col <= m_ColumnCount; col++)
     {
-        double cofactor = this->cofactor(row, col);
+        DATATYPE cofactor = this->cofactor(row, col);
         // printf("Cofactor of %dx%d is: %f\n", row, col, cofactor);
 
-        double valueAt = at(row, col);
+        DATATYPE valueAt = at(row, col);
         result = result + (valueAt * cofactor);
     }
 
     return result;
 }
 
-double Matrix::cofactor(uint i, uint j) {
-    double factor = pow(-1, i+j);
+DATATYPE Matrix::cofactor(uint i, uint j) {
+    DATATYPE factor = pow(-1, i+j);
     
     Matrix minor = this->minor_complementary(i, j);
     return factor * minor.determinant();
@@ -277,8 +277,8 @@ Matrix Matrix::add(const Matrix& m) const
         {
             try 
             {
-                double thisVal = at(i, j);
-                double otherVal = m.at(i, j);
+                DATATYPE thisVal = at(i, j);
+                DATATYPE otherVal = m.at(i, j);
                 result.set(i, j, thisVal+otherVal);
             }
             catch(const std::exception&)
@@ -309,8 +309,8 @@ Matrix Matrix::subtract(const Matrix& m) const
         {
             try 
             {
-                double thisVal = at(i, j);
-                double otherVal = m.at(i, j);
+                DATATYPE thisVal = at(i, j);
+                DATATYPE otherVal = m.at(i, j);
                 result.set(i, j, thisVal-otherVal);
             }
             catch(const std::exception&)
@@ -323,14 +323,14 @@ Matrix Matrix::subtract(const Matrix& m) const
     return result;
 }
 
-Matrix Matrix::multiply(double factor) const
+Matrix Matrix::multiply(DATATYPE factor) const
 {
     Matrix result(m_RowCount, m_ColumnCount);
     for(uint i = 1; i <= m_RowCount; i++)
     {
         for(uint j = 1; j <= m_ColumnCount; j++)
         {
-            double value = at(i, j);
+            DATATYPE value = at(i, j);
             result.set(i, j, value * factor);
         }
     }
@@ -346,16 +346,16 @@ Matrix Matrix::multiply(const Matrix& m) const
     Matrix result(m_RowCount, m.m_ColumnCount);
     result.m_Empty = false;
 
-    double temp = 0;
+    DATATYPE temp = 0;
     for(uint i = 0; i < m_RowCount; i++)
     {
         for(uint j = 0; j < m.m_ColumnCount; j++)
         {
             temp = 0;
             for(uint k = 0; k < m_ColumnCount; k++)
-                temp += m_Matrix[i][k] * m.m_Matrix[k][j];
+                temp += m_Matrix[i + k * m_RowCount] * m.m_Matrix[k + j * m_RowCount];
 
-            result.m_Matrix[i][j] = temp;
+            result.m_Matrix[i + j * m_RowCount] = temp;
         }
     }
     
