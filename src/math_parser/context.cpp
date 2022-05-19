@@ -6,17 +6,17 @@
 #define DEG_TO_RAD M_PI/180
 #define RAD_TO_DEG 180/M_PI
 
-double DefaultContext::resolve_constant(std::string name) {
+DATATYPE DefaultContext::resolve_constant(std::string_view name) {
     if(name == "pi") { 
         return M_PI;
     } else if(name == "e") {
         return M_E;
     }
 
-    throw UnknownConstantException(name);
+    throw UnknownConstantException(std::string(name));
 }
 
-double DefaultContext::call_function(std::string name, double arguments[], uint argumentCount) {
+DATATYPE DefaultContext::call_function(std::string_view name, DATATYPE arguments[], uint argumentCount) {
     if(name == "pow") {
         if(argumentCount != 2) {
             throw InvalidArgumentException("pow expects two arguments.");
@@ -81,21 +81,26 @@ double DefaultContext::call_function(std::string name, double arguments[], uint 
         // }
     }
 
-    throw UnknownFunctionException(name);
+    throw UnknownFunctionException(std::string(name));
 }
 
-double VariableContext::resolve_constant(std::string name) {
+DATATYPE VariableContext::resolve_constant(std::string_view name) {
     try {
         return DefaultContext::resolve_constant(name);
     } catch (const UnknownConstantException& ex) {
-        if(name == this->m_VariableName) {
+        if(name[0] == this->m_VariableName) {
             return this->m_VariableValue;
         }
 
-        throw UnknownVariableException(name);
+        throw UnknownVariableException(std::string(name));
     }
 }
 
-double VariableContext::variable_value() {
+DATATYPE VariableContext::variable_value() const {
     return this->m_VariableValue;
+}
+
+void VariableContext::set_variable_value(DATATYPE newValue)
+{
+    m_VariableValue = newValue;
 }

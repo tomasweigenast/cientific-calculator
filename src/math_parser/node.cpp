@@ -1,31 +1,31 @@
 #include <math_parser/node.h>
 
-double NumberNode::eval(Context *context) {
+DATATYPE NumberNode::eval(Context *context) {
     (void)context;
     return this->m_Number;
 }
 
-double BinaryNode::eval(Context *context) {
-    double left = this->m_Left->eval(context);
-    double right = this->m_Right->eval(context);
+DATATYPE BinaryNode::eval(Context *context) {
+    DATATYPE left = this->m_Left->eval(context);
+    DATATYPE right = this->m_Right->eval(context);
 
-    double result = this->m_Operation->execute(left, right);
+    DATATYPE result = this->m_Operation->execute(left, right);
     return result;
 }
 
-double UnaryNode::eval(Context *context) {
-    double right = this->m_Right->eval(context);
+DATATYPE UnaryNode::eval(Context *context) {
+    DATATYPE right = this->m_Right->eval(context);
     
-    double result = this->m_Operation->execute(0, right);
+    DATATYPE result = this->m_Operation->execute(0, right);
     return result;
 }
 
-double ConstantNode::eval(Context *context) {
+DATATYPE ConstantNode::eval(Context *context) {
     return context->resolve_constant(this->m_ConstantName);
 }
 
-double FunctionNode::eval(Context *context) {
-    double* arguments = new double[this->m_Arguments.size()];
+DATATYPE FunctionNode::eval(Context *context) {
+    DATATYPE* arguments = new DATATYPE[this->m_Arguments.size()];
 
     for(uint i = 0; i < this->m_Arguments.size(); i++) {
         arguments[i] = this->m_Arguments[i]->eval(context);

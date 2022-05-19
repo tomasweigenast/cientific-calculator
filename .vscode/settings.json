@@ -67,6 +67,7 @@
         "thread": "cpp",
         "node.h": "c",
         "function_arguments.h": "c",
-        "future": "c"
+        "future": "c",
+        "parser.h": "c"
     }
 }

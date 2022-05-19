@@ -2,6 +2,7 @@
 #include <test_suite.h>
 #include <iostream>
 #include <programs/matrix/matrix.h>
+#include <programs/summation/summation.h>
 #include <assert/assert.h>
 
 // void matrix_() 
@@ -166,11 +167,36 @@ void input_test_()
 	}
 }
 
+void test_summation_()
+{
+	std::string formula;
+	uint from, to;
+
+	std::cout << "Input a formula: ";
+	std::cin >> formula;
+
+	std::cout << "Input from: ";
+	std::cin >> from;
+
+	std::cout << "Input to: ";
+	std::cin >> to;
+
+	std::istringstream stream(formula);
+	Tokenizer tokenizer(stream);
+	Parser parser(tokenizer);
+
+	Summation summation(parser.parse_expression(), from, to);
+ 	DATATYPE result = summation.evaluate();
+
+	std::cout << "Result: " << result << std::endl;
+}
+
 void TestSuite::run() {
 	std::cout << "Running tests..." << std::endl;
 
 	// test_equality_comparison();
 	// matrix_by_matrix_less_alloc_();
 	// matrix_by_matrix_();
-	input_test_();
+	// input_test_();
+	test_summation_();
 }

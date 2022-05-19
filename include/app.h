@@ -1,3 +1,5 @@
+#pragma once
+
 #define DATATYPE_SIZE 1
 
 #if DATATYPE_SIZE == 0 

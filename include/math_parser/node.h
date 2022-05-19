@@ -9,19 +9,19 @@ struct Node {
             std::cout << "Node deleted." << std::endl;
         };
 
-        virtual double eval(Context *context) = 0;
+        virtual DATATYPE eval(Context *context) = 0;
 };
 
 struct NumberNode : public Node {
     private:
-        double m_Number;
+        DATATYPE m_Number;
 
     public:
         NumberNode() = delete;
-        NumberNode(double number) : m_Number(number) {}
+        NumberNode(DATATYPE number) : m_Number(number) {}
         ~NumberNode() {}
 
-        double eval(Context *context);
+        DATATYPE eval(Context *context);
 
 };
 
@@ -41,7 +41,7 @@ struct BinaryNode : public Node {
             delete m_Operation;
         }
 
-        double eval(Context *context);
+        DATATYPE eval(Context *context);
 };
 
 struct UnaryNode : public Node {
@@ -58,7 +58,7 @@ struct UnaryNode : public Node {
             delete m_Operation;
         }
 
-        double eval(Context *context);
+        DATATYPE eval(Context *context);
 
 };
 
@@ -71,7 +71,7 @@ struct ConstantNode : public Node {
         ConstantNode(std::string constantName) : m_ConstantName(constantName){}
         ~ConstantNode() {}
 
-        double eval(Context *context);
+        DATATYPE eval(Context *context);
 };
 
 struct FunctionNode : public Node {
@@ -91,5 +91,5 @@ struct FunctionNode : public Node {
             m_Arguments.clear();
         }
 
-        double eval(Context *context);
+        DATATYPE eval(Context *context);
 };
