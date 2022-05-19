@@ -146,10 +146,30 @@ void test_matrix_emplace()
 	std::cout << matrix << std::endl;
 }
 
+void input_test_()
+{
+	uint rowCount, colCount;
+	std::cout << "Input row and column size: " << std::endl;
+	std::cin >> rowCount;
+	std::cin >> colCount;
+
+	try
+	{
+		Matrix m(rowCount, colCount);
+
+		// std::cout << m << "Size of matrix: " << sizeof(m) << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+}
+
 void TestSuite::run() {
 	std::cout << "Running tests..." << std::endl;
 
 	// test_equality_comparison();
-	matrix_by_matrix_less_alloc_();
+	// matrix_by_matrix_less_alloc_();
 	// matrix_by_matrix_();
+	input_test_();
 }

@@ -16,7 +16,7 @@
 void* operator new(size_t size)
 {
 	AllocationMetrics::instance().register_alloc(size);
-	malloc(size);
+	return malloc(size);
 }
 
 void operator delete(void* memory, size_t size)
@@ -83,4 +83,6 @@ int main(int argc, char *argv[])
 		Application app;
 		return app.run();
 	}
+	
+	AllocationMetrics::instance().print_usage();
 }

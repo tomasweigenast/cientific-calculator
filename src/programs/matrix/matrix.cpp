@@ -41,6 +41,7 @@ void Matrix::emplace(double value) {
         {
             m_CanEmplace = false;
             m_Empty = false;
+            delete m_NextEmptyPos;
             return;
         }
     }
@@ -357,8 +358,7 @@ Matrix Matrix::multiply(const Matrix& m) const
             result.m_Matrix[i][j] = temp;
         }
     }
-
-    std::cout << "returning result" << std::endl;
+    
     return result;
 }
 

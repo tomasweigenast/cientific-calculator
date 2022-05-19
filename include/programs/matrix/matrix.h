@@ -4,6 +4,7 @@
 #include <util/id_generator.h>
 #include <parser_exception/program_error.h>
 #include <data/pos.h>
+#include <mem/alloc_metric.h>
 
 struct Matrix {
     private:
@@ -15,6 +16,9 @@ struct Matrix {
         bool m_CanEmplace;
 
         void initialize_() {
+            if(m_RowCount < 1) throw ProgramException("Row count must be greater than 0.");
+            if(m_ColumnCount < 1) throw ProgramException("Column count must be greater than 0.");
+
             m_Matrix = new double*[m_RowCount];
             for(uint i = 0; i < m_RowCount; i++) {
                 m_Matrix[i] = new double[m_ColumnCount];
@@ -76,12 +80,16 @@ struct Matrix {
             }
         }
         ~Matrix() {
+            AllocationMetrics::instance().register_free(sizeof(m_Matrix));
+
             for(uint i = 0; i < m_RowCount; ++i) {
                 delete[] m_Matrix[i];
             }
 
             delete[] m_Matrix;
-            delete m_NextEmptyPos;
+            
+            if(m_CanEmplace)
+                delete m_NextEmptyPos;
         }
 
         uint row_count() const;

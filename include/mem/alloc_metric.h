@@ -13,6 +13,7 @@ struct AllocationMetrics
         uint32_t current_usage() const;
         void register_alloc(size_t size);
         void register_free(size_t size);
+        void print_usage();
 
         static AllocationMetrics& instance();
 };

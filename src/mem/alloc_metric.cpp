@@ -18,6 +18,11 @@ void AllocationMetrics::register_free(size_t size)
 	std::cout << "Freeing " << size << " bytes. Total usage: " << current_usage() << " bytes" << std::endl;
 }
 
+void AllocationMetrics::print_usage()
+{
+	std::cout << "Current memory usage: " << current_usage() << " bytes" << std::endl;
+}
+
 static AllocationMetrics s_AllocationMetricInstance;
 AllocationMetrics& AllocationMetrics::instance()
 {
