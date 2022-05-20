@@ -18,21 +18,17 @@ Node* Parser::parse_add_subtract() {
     Node* lhs = this->parse_multiply_divide();
 
     while(true) {
-        MathOperation* operation;
+        BinaryExecutor* operation;
         bool opFound = false;
         
         switch(this->m_Tokenizer.get_token()) {
             case Add:
-                operation = new MathOperation("+", [](double a, double b) -> double {
-                    return a+b;
-                });
+                operation = s_AddOperation;
                 opFound = true;
                 break;
 
             case Subtract:
-                operation = new MathOperation("-", [](double a, double b) -> double {
-                    return a-b;
-                });
+                operation = s_SubtractOperation;
                 opFound = true;
                 break;
 
@@ -61,21 +57,17 @@ Node* Parser::parse_multiply_divide() {
     Node* lhs = this->parse_unary();
 
     while(true) {
-        MathOperation* operation;
+        BinaryExecutor* operation;
         bool opFound = false;
         
         switch(this->m_Tokenizer.get_token()) {
             case Multiply:
-                operation = new MathOperation("*", [](double a, double b) -> double {
-                    return a*b;
-                });
+                operation = s_MultiplyOperation;
                 opFound = true;
                 break;
 
             case Divide:
-                operation = new MathOperation("/", [](double a, double b) -> double {
-                    return a/b;
-                });
+                operation = s_DivideOperation;
                 opFound = true;
                 break;
 
@@ -117,10 +109,7 @@ Node* Parser::parse_unary() {
         Node* rhs = this->parse_unary();
 
         // Create the unary node
-        return new UnaryNode(rhs, new MathOperation("+", [](double a, double b) -> double {
-            (void)a;
-            return -b;
-        }));
+        return new UnaryNode(rhs, s_UnaryExecutor);
     }
 
     // No positive/negative operator so parse a leaf node
@@ -155,7 +144,7 @@ Node* Parser::parse_leaf() {
     // Is it a variable or function?
     if(this->m_Tokenizer.get_token() == Identifier) {
         // capture the name and skip it
-        std::string identifier = this->m_Tokenizer.get_current_identifier();
+        std::string_view identifier = this->m_Tokenizer.get_current_identifier();
         this->m_Tokenizer.next_token();
 
         // Parenthesis indicate a function call, otherwise just a constant

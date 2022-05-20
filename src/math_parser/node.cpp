@@ -9,14 +9,14 @@ DATATYPE BinaryNode::eval(Context *context) {
     DATATYPE left = this->m_Left->eval(context);
     DATATYPE right = this->m_Right->eval(context);
 
-    DATATYPE result = this->m_Operation->execute(left, right);
+    DATATYPE result = (*this->m_Operation)(left, right);
     return result;
 }
 
 DATATYPE UnaryNode::eval(Context *context) {
     DATATYPE right = this->m_Right->eval(context);
     
-    DATATYPE result = this->m_Operation->execute(0, right);
+    DATATYPE result = (*this->m_Operation)(right);
     return result;
 }
 

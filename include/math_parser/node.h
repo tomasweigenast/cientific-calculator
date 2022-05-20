@@ -19,7 +19,9 @@ struct NumberNode : public Node {
     public:
         NumberNode() = delete;
         NumberNode(DATATYPE number) : m_Number(number) {}
-        ~NumberNode() {}
+        ~NumberNode() {
+            std::cout << "NumberNode deleted." << std::endl;
+        }
 
         DATATYPE eval(Context *context);
 
@@ -29,16 +31,16 @@ struct BinaryNode : public Node {
     private:
         Node *m_Left;
         Node *m_Right;
-        MathOperation *m_Operation;
+        BinaryExecutor* m_Operation;
 
     public:
         BinaryNode() = delete;
-        BinaryNode(Node *left, Node *right, MathOperation *operation) 
+        BinaryNode(Node *left, Node *right, BinaryExecutor* operation) 
             : m_Left(left), m_Right(right), m_Operation(operation) {}
         ~BinaryNode() {
             delete m_Left;
             delete m_Right;
-            delete m_Operation;
+            std::cout << "BinaryNode deleted." << std::endl;
         }
 
         DATATYPE eval(Context *context);
@@ -47,15 +49,15 @@ struct BinaryNode : public Node {
 struct UnaryNode : public Node {
     private:
         Node *m_Right;
-        MathOperation *m_Operation;
+        UnaryExecutor* m_Operation;
 
     public:
         UnaryNode() = delete;
-        UnaryNode(Node *right, MathOperation *operation) 
+        UnaryNode(Node *right, UnaryExecutor* operation) 
             : m_Right(right), m_Operation(operation){}
         ~UnaryNode() {
             delete m_Right;
-            delete m_Operation;
+            std::cout << "UnaryNode deleted." << std::endl;
         }
 
         DATATYPE eval(Context *context);
@@ -76,13 +78,13 @@ struct ConstantNode : public Node {
 
 struct FunctionNode : public Node {
     private:
-        std::string m_FunctionName;
+        std::string_view m_FunctionName;
         std::vector<Node*> m_Arguments;
 
     public:
         FunctionNode() = delete;
         FunctionNode(const FunctionNode&) = delete;
-        FunctionNode(std::string functionName, std::vector<Node*> arguments) : m_FunctionName(functionName), m_Arguments(arguments) {}
+        FunctionNode(std::string_view functionName, std::vector<Node*> arguments) : m_FunctionName(functionName), m_Arguments(arguments) {}
         ~FunctionNode() {
             for(Node* n : m_Arguments) {
                 delete n;

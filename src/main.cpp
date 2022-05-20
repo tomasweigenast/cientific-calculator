@@ -1,13 +1,7 @@
-#define _USE_MATH_DEFINES
-
-#include <iostream>
-#include <iomanip>
-#include <sstream>
 #include <string>
-#include <log.h>
 #include <app.h>
 #include <test_suite.h>
-#include <cmath>
+#include <math_parser/operation.h>
 #include <mem/alloc_metric.h> 
 
 void* operator new(size_t size)
@@ -35,10 +29,11 @@ int main(int argc, char *argv[])
 	// Run calculator
 	else 
 	{
-		println("Welcome to the scientific calculator");
+		std::cout << "Welcome to the scientific calculator" << std::endl;
 		Application app;
 		return app.run();
 	}
 	
+	cleanup_operations();
 	AllocationMetrics::instance().print_usage();
 }

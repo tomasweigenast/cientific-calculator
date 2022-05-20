@@ -1,17 +1,26 @@
 #include <functional>
 #include <string>
+#include <app.h>
+#include <iostream>
 
-typedef std::function<double (double, double)> OperationExecutor;
+typedef std::function<DATATYPE (DATATYPE, DATATYPE)> BinaryExecutor;
+typedef std::function<DATATYPE (DATATYPE)> UnaryExecutor;
 
-struct MathOperation {
-    private:
-        std::string m_Operand;
-        OperationExecutor m_Executor;
+static BinaryExecutor* s_AddOperation = new BinaryExecutor([](DATATYPE a, DATATYPE b) -> DATATYPE { return a+b; });
+static BinaryExecutor* s_SubtractOperation = new BinaryExecutor([](DATATYPE a, DATATYPE b) -> DATATYPE { return a-b; });
+static BinaryExecutor* s_MultiplyOperation = new BinaryExecutor([](DATATYPE a, DATATYPE b) -> DATATYPE { return a*b; });
+static BinaryExecutor* s_DivideOperation = new BinaryExecutor([](DATATYPE a, DATATYPE b) -> DATATYPE { return a/b; });
 
-    public:
-        MathOperation() = delete;
-        MathOperation(std::string operand, OperationExecutor executor) 
-            : m_Operand(operand), m_Executor(executor){}
+static UnaryExecutor* s_UnaryExecutor = new UnaryExecutor([](DATATYPE a) -> DATATYPE { return -a; });
 
-        double execute(double a, double b);
-};
+static void cleanup_operations()
+{
+    std::cout << "Cleaning operations..." << std::endl;
+    delete s_AddOperation;
+    delete s_SubtractOperation;
+    delete s_MultiplyOperation;
+    delete s_DivideOperation;
+    delete s_UnaryExecutor;
+
+    std::cout << "Cleaned" << std::endl;
+}
