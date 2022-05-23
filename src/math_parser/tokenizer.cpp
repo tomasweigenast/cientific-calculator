@@ -91,7 +91,8 @@ void Tokenizer::next_token() {
     }
 
     // Constant or identifier. Starts with letter or underscore
-    if(isalpha(this->m_CurrentChar) || this->m_CurrentChar == '_') {
+    if(isalpha(this->m_CurrentChar) || this->m_CurrentChar == '_') 
+    {
         std::stringstream builder;
 
         // accept letter, digit or underscore

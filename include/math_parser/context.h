@@ -24,6 +24,7 @@ struct VariableContext : public DefaultContext {
         VariableContext(const VariableContext&) = delete;
         VariableContext(DATATYPE variableValue, const char& variableName) : m_VariableValue(variableValue), m_VariableName(variableName){}
         VariableContext(const char& variableName) : m_VariableName(variableName) {}
+        virtual ~VariableContext(){}
 
         DATATYPE resolve_constant(std::string_view name) override;
         DATATYPE variable_value() const;

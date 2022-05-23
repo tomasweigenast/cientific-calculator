@@ -5,6 +5,10 @@
 
 struct Node {
     public:
+        Node()
+        {
+            std::cout << "Node created." << std::endl;
+        }
         virtual ~Node(){
             std::cout << "Node deleted." << std::endl;
         };
@@ -18,7 +22,10 @@ struct NumberNode : public Node {
 
     public:
         NumberNode() = delete;
-        NumberNode(DATATYPE number) : m_Number(number) {}
+        NumberNode(DATATYPE number) : m_Number(number) 
+        {
+            std::cout << "NumberNode created." << std::endl;
+        }
         ~NumberNode() {
             std::cout << "NumberNode deleted." << std::endl;
         }
@@ -31,12 +38,15 @@ struct BinaryNode : public Node {
     private:
         Node *m_Left;
         Node *m_Right;
-        BinaryExecutor* m_Operation;
+        const BinaryExecutor& m_Operation;
 
     public:
         BinaryNode() = delete;
-        BinaryNode(Node *left, Node *right, BinaryExecutor* operation) 
-            : m_Left(left), m_Right(right), m_Operation(operation) {}
+        BinaryNode(Node *left, Node *right, const BinaryExecutor& operation) 
+            : m_Left(left), m_Right(right), m_Operation(operation) 
+            {
+                std::cout << "Binary node created." << std::endl;
+            }
         ~BinaryNode() {
             delete m_Left;
             delete m_Right;
@@ -49,12 +59,15 @@ struct BinaryNode : public Node {
 struct UnaryNode : public Node {
     private:
         Node *m_Right;
-        UnaryExecutor* m_Operation;
+        const UnaryExecutor& m_Operation;
 
     public:
         UnaryNode() = delete;
-        UnaryNode(Node *right, UnaryExecutor* operation) 
-            : m_Right(right), m_Operation(operation){}
+        UnaryNode(Node *right, const UnaryExecutor& operation) 
+            : m_Right(right), m_Operation(operation)
+            {
+                std::cout << "UnaryNode created." << std::endl;
+            }
         ~UnaryNode() {
             delete m_Right;
             std::cout << "UnaryNode deleted." << std::endl;

@@ -18,17 +18,17 @@ Node* Parser::parse_add_subtract() {
     Node* lhs = this->parse_multiply_divide();
 
     while(true) {
-        BinaryExecutor* operation;
+        const BinaryExecutor* operation;
         bool opFound = false;
         
         switch(this->m_Tokenizer.get_token()) {
             case Add:
-                operation = s_AddOperation;
+                operation = &add_operation();
                 opFound = true;
                 break;
 
             case Subtract:
-                operation = s_SubtractOperation;
+                operation = &subtract_operation();
                 opFound = true;
                 break;
 
@@ -48,7 +48,7 @@ Node* Parser::parse_add_subtract() {
         Node* rhs = this->parse_multiply_divide();
 
         // Create a binary node and use it as the left-hand side now on
-        lhs = new BinaryNode(lhs, rhs, operation);
+        lhs = new BinaryNode(lhs, rhs, *operation);
     }
 }
 
@@ -57,17 +57,17 @@ Node* Parser::parse_multiply_divide() {
     Node* lhs = this->parse_unary();
 
     while(true) {
-        BinaryExecutor* operation;
+        const BinaryExecutor* operation;
         bool opFound = false;
         
         switch(this->m_Tokenizer.get_token()) {
             case Multiply:
-                operation = s_MultiplyOperation;
+                operation = &multiply_operation();
                 opFound = true;
                 break;
 
             case Divide:
-                operation = s_DivideOperation;
+                operation = &divide_operation();
                 opFound = true;
                 break;
 
@@ -87,7 +87,7 @@ Node* Parser::parse_multiply_divide() {
         Node* rhs = this->parse_unary();
 
         // Create a binary node and use it as the left-hand side now on
-        lhs = new BinaryNode(lhs, rhs, operation);
+        lhs = new BinaryNode(lhs, rhs, *operation);
     }
 }
 
@@ -109,7 +109,7 @@ Node* Parser::parse_unary() {
         Node* rhs = this->parse_unary();
 
         // Create the unary node
-        return new UnaryNode(rhs, s_UnaryExecutor);
+        return new UnaryNode(rhs, unary_operation());
     }
 
     // No positive/negative operator so parse a leaf node

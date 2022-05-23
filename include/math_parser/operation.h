@@ -3,24 +3,35 @@
 #include <app.h>
 #include <iostream>
 
-typedef std::function<DATATYPE (DATATYPE, DATATYPE)> BinaryExecutor;
-typedef std::function<DATATYPE (DATATYPE)> UnaryExecutor;
+typedef DATATYPE(*BinaryExecutor)(DATATYPE, DATATYPE);
+typedef DATATYPE(*UnaryExecutor)(DATATYPE);
 
-static BinaryExecutor* s_AddOperation = new BinaryExecutor([](DATATYPE a, DATATYPE b) -> DATATYPE { return a+b; });
-static BinaryExecutor* s_SubtractOperation = new BinaryExecutor([](DATATYPE a, DATATYPE b) -> DATATYPE { return a-b; });
-static BinaryExecutor* s_MultiplyOperation = new BinaryExecutor([](DATATYPE a, DATATYPE b) -> DATATYPE { return a*b; });
-static BinaryExecutor* s_DivideOperation = new BinaryExecutor([](DATATYPE a, DATATYPE b) -> DATATYPE { return a/b; });
-
-static UnaryExecutor* s_UnaryExecutor = new UnaryExecutor([](DATATYPE a) -> DATATYPE { return -a; });
-
-static void cleanup_operations()
+static const BinaryExecutor& add_operation()
 {
-    std::cout << "Cleaning operations..." << std::endl;
-    delete s_AddOperation;
-    delete s_SubtractOperation;
-    delete s_MultiplyOperation;
-    delete s_DivideOperation;
-    delete s_UnaryExecutor;
+    static BinaryExecutor operation = [](DATATYPE a, DATATYPE b) -> DATATYPE { return a + b; };
+    return operation;
+}
 
-    std::cout << "Cleaned" << std::endl;
+static const BinaryExecutor& subtract_operation()
+{
+    static BinaryExecutor operation = [](DATATYPE a, DATATYPE b) -> DATATYPE { return a - b; };
+    return operation;
+}
+
+static const BinaryExecutor& multiply_operation()
+{
+    static BinaryExecutor operation = [](DATATYPE a, DATATYPE b) -> DATATYPE { return a * b; };
+    return operation;
+}
+
+static const BinaryExecutor& divide_operation()
+{
+    static BinaryExecutor operation = [](DATATYPE a, DATATYPE b) -> DATATYPE { return a / b; };
+    return operation;
+}
+
+static const UnaryExecutor& unary_operation()
+{
+    static UnaryExecutor operation = [](DATATYPE a) -> DATATYPE { return -a; };
+    return operation;
 }

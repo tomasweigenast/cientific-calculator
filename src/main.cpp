@@ -34,6 +34,5 @@ int main(int argc, char *argv[])
 		return app.run();
 	}
 	
-	cleanup_operations();
 	AllocationMetrics::instance().print_usage();
 }
